@@ -14,7 +14,7 @@ export function TodaysGoal({ goal }: Props) {
       <div className="mb-5 flex items-center justify-between">
         <div>
           <p className="text-sm text-slate-400">
-            Today's Goal
+            Today&apos;s Goal
           </p>
 
           <h2 className="mt-2 text-3xl font-bold">
