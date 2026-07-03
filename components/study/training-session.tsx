@@ -32,11 +32,14 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
   // Session data (random pool or resumed session) is only built client-side
   // after mount to avoid a hydration mismatch — render nothing until then.
-  if (loading || !question) {
+  // Checked before the empty-pool case below, since `loading` is the only
+  // state where `question` is expected to be undefined for a reason other
+  // than "this article has no questions."
+  if (loading) {
     return null;
   }
 
-  if (progress.total === 0) {
+  if (progress.total === 0 || !question) {
     return (
       <div className="rounded-card border border-border bg-card p-8 text-center">
         <h2 className="text-xl font-bold text-foreground">No Questions Available</h2>
