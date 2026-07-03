@@ -13,4 +13,6 @@ export interface Question {
   explanation: string;
   references: string[];
   tags: string[];
+  /** Set when content authorship wasn't fully confident in the citation or correctness; needs human spot-check. */
+  needsReview?: boolean;
 }

@@ -4,56 +4,71 @@ export const articles: Article[] = [
   {
     number: "90",
     title: "Introduction",
-    questionCount: 5,
+    questionCount: 0,
   },
   {
     number: "100",
     title: "Definitions",
-    questionCount: 8,
+    questionCount: 0,
   },
   {
     number: "110",
     title: "Requirements for Electrical Installations",
-    questionCount: 12,
+    questionCount: 0,
   },
   {
     number: "210",
     title: "Branch Circuits",
-    questionCount: 15,
+    questionCount: 1,
+  },
+  {
+    number: "215",
+    title: "Feeders",
+    questionCount: 1,
   },
   {
     number: "220",
     title: "Branch-Circuit Calculations",
-    questionCount: 15,
+    questionCount: 1,
   },
   {
     number: "230",
     title: "Services",
-    questionCount: 15,
+    questionCount: 1,
   },
   {
     number: "240",
     title: "Overcurrent Protection",
-    questionCount: 20,
+    questionCount: 1,
   },
   {
     number: "250",
     title: "Grounding & Bonding",
-    questionCount: 30,
+    questionCount: 3,
   },
   {
     number: "300",
     title: "Wiring Methods",
-    questionCount: 20,
+    questionCount: 0,
   },
   {
     number: "310",
     title: "Conductors",
-    questionCount: 25,
+    questionCount: 1,
+  },
+  {
+    number: "314",
+    title: "Boxes and Conduit Bodies",
+    questionCount: 1,
   },
   {
     number: "430",
     title: "Motors",
-    questionCount: 30,
+    questionCount: 1,
+  },
+  {
+    number: "450",
+    title: "Transformers",
+    questionCount: 1,
   }
 ];
