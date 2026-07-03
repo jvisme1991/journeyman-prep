@@ -883,7 +883,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Working space depth requirements increase with both voltage and how exposed the live parts are on either side of the space — Condition 3 (live parts on both sides) at this voltage range calls for the largest of the three depth categories.",
     references: ["Table 110.26(A)(1)"],
-    tags: ["installations", "working-space"],
+    tags: ["installations", "working-space"],
   },
   {
     id: "110-012",
@@ -937,7 +937,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Dedicated equipment space is meant to keep the area around electrical gear clear of unrelated systems (plumbing, ductwork, etc.) that could leak or fail onto it.",
     references: ["110.26(E)"],
-    tags: ["installations", "dedicated-space"],
+    tags: ["installations", "dedicated-space"],
   },
   {
     id: "110-015",
@@ -1014,7 +1014,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "24 inches is the general baseline minimum burial depth for an unprotected direct-buried conductor; the table then reduces that requirement for specific conditions like added physical protection, GFCI protection, or low-voltage circuits.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-005",
@@ -1027,7 +1027,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "Because RMC and IMC provide substantial mechanical protection on their own, the table allows a much shallower minimum cover than an unprotected direct-buried cable.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-006",
@@ -1040,7 +1040,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "GFCI protection combined with a low current rating is treated as reducing the shock hazard enough that the table allows a shallower minimum burial depth than the general 24-inch requirement.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-007",
@@ -1053,7 +1053,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "The reduced shock hazard of a low-voltage circuit is reflected in the table's shallowest cover requirement, well below what's required for a standard 120/240V branch circuit.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-008",
@@ -1429,7 +1429,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "180 VA per outlet (or per strap/yoke) is the default receptacle load value used when a receptacle load isn't already covered by another specific calculation rule.",
     references: ["220.14(I)"],
-    tags: ["load-calculations", "receptacles"],
+    tags: ["load-calculations", "receptacles"],
   },
   {
     id: "220-004",
@@ -1468,7 +1468,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Once there are enough fixed appliances that they're unlikely to all run simultaneously, the Code allows a 75% demand factor to be applied to their combined nameplate load.",
     references: ["220.53"],
-    tags: ["load-calculations", "demand-factors", "appliances"],
+    tags: ["load-calculations", "demand-factors", "appliances"],
   },
   {
     id: "220-007",
@@ -1481,7 +1481,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "5000 watts is the floor value used for a single dryer's demand load, with the actual nameplate rating used instead if it's higher.",
     references: ["Table 220.54"],
-    tags: ["load-calculations", "dryer"],
+    tags: ["load-calculations", "dryer"],
   },
   {
     id: "220-008",
@@ -1494,7 +1494,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Table 220.55 lets a single range up to 12 kW be counted at roughly 8 kW of demand, reflecting that a range's elements don't all run at full draw simultaneously.",
     references: ["Table 220.55"],
-    tags: ["load-calculations", "range"],
+    tags: ["load-calculations", "range"],
   },
   {
     id: "220-009",
@@ -1507,7 +1507,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Beyond the 200A threshold, the Code allows a reduced demand factor on the neutral portion of these appliance loads, reflecting that not all the connected load returns on the neutral simultaneously.",
     references: ["220.61(B)"],
-    tags: ["load-calculations", "neutral", "feeders"],
+    tags: ["load-calculations", "neutral", "feeders"],
   },
   {
     id: "220-010",
@@ -1520,7 +1520,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "The optional method front-loads the first 10 kVA of general load at full value, then applies a reduced demand factor to everything above that, as a simpler alternative to the standard calculation method.",
     references: ["220.82(B)"],
-    tags: ["load-calculations", "optional-method"],
+    tags: ["load-calculations", "optional-method"],
   },
   {
     id: "220-011",
@@ -1533,7 +1533,7 @@ export const questions: Question[] = [
     correctAnswer: 3,
     explanation: "This provision lets an installer rely on a full year of actual recorded demand data, rather than redoing the entire calculated load, when determining whether there's room for an additional load.",
     references: ["220.87"],
-    tags: ["load-calculations", "existing-loads"],
+    tags: ["load-calculations", "existing-loads"],
   },
   {
     id: "220-012",
@@ -1605,7 +1605,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "This optional method scales its demand factor down as the number of dwelling units on a shared feeder or service increases, reflecting that not every unit peaks at the same time.",
     references: ["Table 220.84"],
-    tags: ["load-calculations", "optional-method", "multifamily"],
+    tags: ["load-calculations", "optional-method", "multifamily"],
   },
 
   // Article 230 - Services
@@ -1638,7 +1638,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "This clearance keeps someone leaning out of a window or doorway from being able to reach bare overhead service conductors.",
     references: ["230.9(A)"],
-    tags: ["services", "clearances"],
+    tags: ["services", "clearances"],
   },
   {
     id: "230-004",
@@ -1651,7 +1651,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "10 feet is the reduced clearance permitted specifically at the point of entrance to a building (and at the final splice/drip loop), rather than the higher clearances required over open ground.",
     references: ["230.24(B)(1)"],
-    tags: ["services", "clearances"],
+    tags: ["services", "clearances"],
   },
   {
     id: "230-005",
@@ -1664,7 +1664,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "12 feet is the standard clearance over residential driveways and yard areas at this voltage level, stepping up from the reduced 10-foot clearance allowed right at the building's point of entrance.",
     references: ["230.24(B)(2)"],
-    tags: ["services", "clearances"],
+    tags: ["services", "clearances"],
   },
   {
     id: "230-006",
@@ -1752,7 +1752,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "One-family dwellings have their own minimum service disconnect rating in this section, higher than the general minimum that applies to other occupancy types.",
     references: ["230.79(C)"],
-    tags: ["services", "disconnect"],
+    tags: ["services", "disconnect"],
   },
   {
     id: "230-012",
@@ -1806,7 +1806,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "230.6 recognizes specific installation methods — including sufficient concrete encasement or minimum burial cover — that let conductors routed under a building still be treated as if they were outside it.",
     references: ["230.6"],
-    tags: ["services", "conductors-outside-building"],
+    tags: ["services", "conductors-outside-building"],
   },
   {
     id: "230-015",
@@ -1896,7 +1896,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "The 'round up to the next standard size' allowance has an upper ceiling — above that ampere threshold, the conductor's actual ampacity has to be matched more precisely rather than rounded up.",
     references: ["240.4(B)"],
-    tags: ["overcurrent-protection", "conductor-protection"],
+    tags: ["overcurrent-protection", "conductor-protection"],
   },
   {
     id: "240-007",
@@ -1909,7 +1909,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "70A is one of the listed standard sizes in the standard ampere rating table, while the other options fall between standard sizes and aren't recognized standard ratings.",
     references: ["240.6(A)"],
-    tags: ["overcurrent-protection", "standard-ratings"],
+    tags: ["overcurrent-protection", "standard-ratings"],
   },
   {
     id: "240-008",
@@ -1922,7 +1922,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "The 10-foot tap rule allows a very short tap conductor to skip having its own overcurrent device at the tap point, provided it meets several other conditions like ampacity and termination requirements.",
     references: ["240.21(B)(1)"],
-    tags: ["overcurrent-protection", "feeder-taps"],
+    tags: ["overcurrent-protection", "feeder-taps"],
   },
   {
     id: "240-009",
@@ -1940,7 +1940,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "The 25-foot tap rule trades a longer allowed tap length for a stricter minimum ampacity requirement on the tap conductor, relative to the feeder's overcurrent device rating.",
     references: ["240.21(B)(2)"],
-    tags: ["overcurrent-protection", "feeder-taps"],
+    tags: ["overcurrent-protection", "feeder-taps"],
   },
   {
     id: "240-010",
@@ -2043,7 +2043,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Arc energy reduction methods (like zone-selective interlocking or an energy-reducing maintenance switch) are meant to shorten how long a large breaker takes to clear an arcing fault, limiting the energy released.",
     references: ["240.87"],
-    tags: ["overcurrent-protection", "arc-energy-reduction"],
+    tags: ["overcurrent-protection", "arc-energy-reduction"],
   },
 
   // Article 215 - Feeders
@@ -2090,7 +2090,6 @@ export const questions: Question[] = [
     explanation: "Voltage drop guidance in the NEC is presented as an Informational Note, not a 'shall' requirement, so it's a design recommendation rather than something an inspector enforces directly.",
     references: ["215.2, Informational Note"],
     tags: ["feeders", "voltage-drop"],
-    needsReview: true,
   },
   {
     id: "215-005",
@@ -2101,15 +2100,14 @@ export const questions: Question[] = [
     question: "Per 215.4(A), a common neutral is generally permitted to serve...",
     answers: [
       "Any number of feeder sets, without limit",
-      "Up to two or three sets of feeder conductors installed in the same raceway or cable",
+      "Up to three sets of 3-wire feeders, or up to two sets of 4-wire or 5-wire feeders",
       "Only a single feeder, never shared",
       "Feeders supplying different buildings only",
     ],
     correctAnswer: 1,
-    explanation: "The Code allows a shared neutral across a limited number of feeder sets run together, rather than an unlimited number, to keep the neutral's actual current within reasonable bounds.",
+    explanation: "The sharing limit depends on the feeder configuration — three 3-wire feeder sets are allowed to share a common neutral, but 4-wire or 5-wire sets (which already carry more phase conductors each) are limited to two, to keep the shared neutral's actual current within reasonable bounds.",
     references: ["215.4(A)"],
     tags: ["feeders", "common-neutral"],
-    needsReview: true,
   },
   {
     id: "215-006",
@@ -2309,9 +2307,8 @@ export const questions: Question[] = [
     answers: ["4 feet", "6 feet", "8 feet", "10 feet"],
     correctAnswer: 2,
     explanation: "Rod electrodes need enough contact with the earth to achieve a reasonably low, stable resistance, which is why a minimum driven length is specified.",
-    references: ["250.53(G)"],
+    references: ["250.53(A)(4)"],
     tags: ["grounding", "grounding-electrodes"],
-    needsReview: true,
   },
   {
     id: "250-007",
@@ -2319,7 +2316,7 @@ export const questions: Question[] = [
     chapter: 2,
     topic: "Electrode Resistance",
     difficulty: "hard",
-    question: "Per 250.56, a single rod, pipe, or plate electrode with a resistance to earth greater than 25 ohms generally must be...",
+    question: "Per 250.53(A)(2), Exception, a single rod, pipe, or plate electrode with a resistance to earth greater than 25 ohms generally must be...",
     answers: [
       "Removed and replaced with a plate electrode",
       "Left as-is, since 25 ohms is already within the acceptable range",
@@ -2328,9 +2325,8 @@ export const questions: Question[] = [
     ],
     correctAnswer: 2,
     explanation: "25 ohms is the threshold below which a single rod/pipe/plate electrode is accepted on its own; above that, the Code requires adding another electrode rather than relying on one high-resistance path to earth.",
-    references: ["250.56"],
+    references: ["250.53(A)(2), Exception"],
     tags: ["grounding", "grounding-electrodes"],
-    needsReview: true,
   },
   {
     id: "250-008",
@@ -2362,7 +2358,6 @@ export const questions: Question[] = [
     explanation: "Table 250.66 scales the grounding electrode conductor to the service conductors themselves, not to the disconnect's ampere rating (that logic is used for equipment grounding conductors instead, via Table 250.122).",
     references: ["Table 250.66"],
     tags: ["grounding", "grounding-electrode-conductor"],
-    needsReview: true,
   },
   {
     id: "250-010",
@@ -2399,7 +2394,6 @@ export const questions: Question[] = [
     explanation: "Table 250.102(C)(1) parallels Table 250.66's approach — sizing keyed to the largest ungrounded conductor — though the two tables aren't identical and shouldn't be used interchangeably.",
     references: ["Table 250.102(C)(1)"],
     tags: ["grounding", "bonding-jumpers"],
-    needsReview: true,
   },
   {
     id: "250-012",
@@ -2513,7 +2507,6 @@ export const questions: Question[] = [
     explanation: "The 90°C column gives the highest tabulated ampacity for a given conductor size — though this value is often still limited in practice by termination ratings (110.14(C)) or the small-conductor rule (240.4(D)).",
     references: ["Table 310.16"],
     tags: ["conductors", "ampacity"],
-    needsReview: true,
   },
   {
     id: "310-005",
@@ -2527,7 +2520,6 @@ export const questions: Question[] = [
     explanation: "The 75°C column is the one most commonly used for standard building wire terminations rated 75°C, and this is the tabulated value at that column for 10 AWG copper.",
     references: ["Table 310.16"],
     tags: ["conductors", "ampacity"],
-    needsReview: true,
   },
   {
     id: "310-006",
@@ -2541,7 +2533,6 @@ export const questions: Question[] = [
     explanation: "This is the tabulated 75°C ampacity for 8 AWG copper before any deratings are applied for ambient temperature or conductor fill.",
     references: ["Table 310.16"],
     tags: ["conductors", "ampacity"],
-    needsReview: true,
   },
   {
     id: "310-007",
@@ -2591,7 +2582,6 @@ export const questions: Question[] = [
     explanation: "Bundling more current-carrying conductors together traps more heat, so the table reduces the usable ampacity as the conductor count in a raceway or cable increases.",
     references: ["Table 310.15(C)(1)"],
     tags: ["conductors", "ampacity", "adjustment-factors"],
-    needsReview: true,
   },
   {
     id: "310-010",
@@ -2605,7 +2595,6 @@ export const questions: Question[] = [
     explanation: "As more current-carrying conductors share a raceway or cable, the adjustment factor steps down further than the 4-6 conductor tier, reflecting the additional heat buildup.",
     references: ["Table 310.15(C)(1)"],
     tags: ["conductors", "ampacity", "adjustment-factors"],
-    needsReview: true,
   },
   {
     id: "310-011",
@@ -2622,21 +2611,20 @@ export const questions: Question[] = [
     ],
     correctAnswer: 1,
     explanation: "A neutral that only carries the difference between otherwise-balanced phase currents isn't treated as an additional current-carrying conductor for fill purposes — though a neutral on a circuit with significant harmonic content is treated differently.",
-    references: ["Table 310.15(C)(1), Note"],
+    references: ["310.15(E)(1)"],
     tags: ["conductors", "ampacity", "adjustment-factors"],
-    needsReview: true,
   },
   {
     id: "310-012",
     article: "310",
     chapter: 3,
-    topic: "Minimum Conductor Size",
+    topic: "Table 310.16 Conductor Size Range",
     difficulty: "medium",
-    question: "For general wiring, the smallest copper conductor size generally permitted is...",
-    answers: ["18 AWG", "16 AWG", "14 AWG", "12 AWG"],
-    correctAnswer: 2,
-    explanation: "14 AWG copper is the general floor for branch-circuit-type conductors under standard wiring methods, though certain applications (like Class 2 control circuits) permit smaller conductors under their own specific rules.",
-    references: ["310.106(A)"],
+    question: "Per Table 310.16, the ampacity table for insulated conductors includes entries for copper conductor sizes as small as...",
+    answers: ["10 AWG", "12 AWG", "14 AWG", "18 AWG"],
+    correctAnswer: 3,
+    explanation: "Table 310.16 lists ampacities down to 18 AWG, though the table's own notes restrict use of the smallest listed sizes (18 and 16 AWG) to specific applications called out elsewhere in the Code rather than general branch-circuit wiring.",
+    references: ["Table 310.16"],
     tags: ["conductors", "minimum-size"],
     needsReview: true,
   },
@@ -2650,9 +2638,8 @@ export const questions: Question[] = [
     answers: ["Dry locations only at their 90°C rating", "Wet locations only", "Underground burial only", "Hazardous locations only"],
     correctAnswer: 0,
     explanation: "Some insulation types keep their higher temperature rating in wet conditions; others (like standard THHN) only carry their 90°C rating in dry locations and drop to a lower rating if used somewhere wet.",
-    references: ["Table 310.104(A)"],
+    references: ["Table 310.4(1)"],
     tags: ["conductors", "insulation-types"],
-    needsReview: true,
   },
   {
     id: "310-014",
@@ -2712,7 +2699,6 @@ export const questions: Question[] = [
     explanation: "A device takes up more room than a single conductor would, so the fill calculation counts it as a double allowance sized to the largest conductor terminated on it.",
     references: ["314.16(B)(4)"],
     tags: ["boxes", "box-fill"],
-    needsReview: true,
   },
   {
     id: "314-004",
@@ -2720,13 +2706,17 @@ export const questions: Question[] = [
     chapter: 3,
     topic: "Box Fill Counting Rules",
     difficulty: "hard",
-    question: "Per 314.16(B), where multiple equipment grounding conductors are present in the same box, they generally count toward box fill as...",
-    answers: ["Each one counted separately", "One single volume allowance total, based on the largest one present", "Zero allowance, since grounding conductors are exempt", "Two allowances regardless of how many are present"],
+    question: "Per 314.16(B)(5), how do multiple equipment grounding conductors present in the same box count toward the box fill calculation?",
+    answers: [
+      "Each one counted separately, using its own full volume allowance",
+      "Up to four count as one combined allowance (based on the largest); each additional one beyond four adds a quarter allowance",
+      "Zero allowance, since grounding conductors are exempt from box fill",
+      "All of them together always count as exactly two allowances, regardless of quantity",
+    ],
     correctAnswer: 1,
-    explanation: "All the grounding conductors bundle together for fill purposes into a single allowance sized to whichever one is largest, rather than being tallied individually.",
+    explanation: "The first four equipment grounding conductors bundle into a single allowance sized to the largest one present, but a fifth (or more) each add their own quarter-allowance on top rather than being absorbed for free.",
     references: ["314.16(B)(5)"],
     tags: ["boxes", "box-fill"],
-    needsReview: true,
   },
   {
     id: "314-005",
@@ -2740,7 +2730,6 @@ export const questions: Question[] = [
     explanation: "However many clamps are inside the box, they're treated as a single combined allowance — sized to the largest conductor present — rather than counted clamp by clamp.",
     references: ["314.16(B)(2)"],
     tags: ["boxes", "box-fill"],
-    needsReview: true,
   },
   {
     id: "314-006",
@@ -2754,7 +2743,6 @@ export const questions: Question[] = [
     explanation: "Table 314.16(B) assigns a specific cubic-inch allowance per conductor size, increasing as the conductor gets larger — this is the tabulated value for 12 AWG.",
     references: ["Table 314.16(B)"],
     tags: ["boxes", "box-fill"],
-    needsReview: true,
   },
   {
     id: "314-007",
@@ -2853,7 +2841,6 @@ export const questions: Question[] = [
     explanation: "Straight pulls need enough length to avoid sharply bending large conductors during installation, which is why the minimum distance scales directly with the largest raceway's trade size.",
     references: ["314.28(A)(1)"],
     tags: ["boxes", "pull-boxes"],
-    needsReview: true,
   },
   {
     id: "314-013",
@@ -2867,7 +2854,6 @@ export const questions: Question[] = [
     explanation: "Angle and U pulls need more clearance than straight pulls because the conductors have to bend within the box, and additional raceways entering the same wall add to that space requirement.",
     references: ["314.28(A)(2)"],
     tags: ["boxes", "pull-boxes"],
-    needsReview: true,
   },
   {
     id: "314-014",
@@ -2950,7 +2936,6 @@ export const questions: Question[] = [
     explanation: "Motor branch-circuit conductors get a 125% margin over the table full-load current, similar in spirit to the continuous-load margin used elsewhere in the Code.",
     references: ["430.22"],
     tags: ["motors", "conductor-sizing"],
-    needsReview: true,
   },
   {
     id: "430-005",
@@ -2964,7 +2949,6 @@ export const questions: Question[] = [
     explanation: "The largest motor gets the extra 25% margin (reflecting its starting/running behavior), while the other motors on the same feeder are added in at their full table FLC value.",
     references: ["430.24"],
     tags: ["motors", "conductor-sizing"],
-    needsReview: true,
   },
   {
     id: "430-006",
@@ -2978,7 +2962,6 @@ export const questions: Question[] = [
     explanation: "A higher service factor indicates the motor is designed to tolerate some overload, so the Code allows a correspondingly higher overload trip setting for those motors.",
     references: ["430.32(A)(1)"],
     tags: ["motors", "overload-protection"],
-    needsReview: true,
   },
   {
     id: "430-007",
@@ -2992,7 +2975,6 @@ export const questions: Question[] = [
     explanation: "Motors without that extra service-factor margin get a tighter overload setting than motors that are designed to handle some overload, since they have less built-in tolerance.",
     references: ["430.32(A)(1)"],
     tags: ["motors", "overload-protection"],
-    needsReview: true,
   },
   {
     id: "430-008",
@@ -3024,7 +3006,6 @@ export const questions: Question[] = [
     explanation: "Non-time-delay fuses need a higher percentage allowance than time-delay types because they don't have a built-in delay to ride through a motor's normal starting inrush current.",
     references: ["Table 430.52"],
     tags: ["motors", "short-circuit-protection"],
-    needsReview: true,
   },
   {
     id: "430-010",
@@ -3038,7 +3019,6 @@ export const questions: Question[] = [
     explanation: "Inverse-time breakers get their own maximum percentage in Table 430.52, distinct from the fuse categories, reflecting how that device type responds to a motor's starting current.",
     references: ["Table 430.52"],
     tags: ["motors", "short-circuit-protection"],
-    needsReview: true,
   },
   {
     id: "430-011",
@@ -3083,7 +3063,6 @@ export const questions: Question[] = [
     explanation: "The disconnect needs enough margin above the motor's running current to handle it reliably, though this percentage is distinct from (and smaller than) the 125% margin used for branch-circuit conductor sizing.",
     references: ["430.110(A)"],
     tags: ["motors", "disconnects"],
-    needsReview: true,
   },
   {
     id: "430-014",
@@ -3102,7 +3081,6 @@ export const questions: Question[] = [
     explanation: "General-use switches aren't necessarily rated to interrupt a motor's current safely, so motor disconnects generally need to be horsepower-rated devices instead.",
     references: ["430.109"],
     tags: ["motors", "disconnects"],
-    needsReview: true,
   },
   {
     id: "430-015",
@@ -3154,7 +3132,6 @@ export const questions: Question[] = [
     explanation: "This is the standard primary-only maximum for transformers with a primary current high enough to fall into the general rule, rather than the higher percentages allowed for smaller-current transformers.",
     references: ["Table 450.3(B)"],
     tags: ["transformers", "overcurrent-protection"],
-    needsReview: true,
   },
   {
     id: "450-004",
@@ -3204,7 +3181,6 @@ export const questions: Question[] = [
     explanation: "Below this size threshold, impedance marking generally isn't required on the nameplate; at and above it, the value becomes important enough (for fault-current calculations, for example) that the Code requires it be marked.",
     references: ["450.11"],
     tags: ["transformers", "marking"],
-    needsReview: true,
   },
   {
     id: "450-007",
@@ -3236,7 +3212,6 @@ export const questions: Question[] = [
     explanation: "Hollow-space installation trades full accessibility for convenience, so the Code caps the transformer size permitted there rather than allowing any size to be tucked into a wall or ceiling cavity.",
     references: ["450.13(B)"],
     tags: ["transformers", "accessibility"],
-    needsReview: true,
   },
   {
     id: "450-009",
@@ -3250,7 +3225,6 @@ export const questions: Question[] = [
     explanation: "This clearance (or an approved fire-resistant barrier in place of it) keeps normal transformer operating heat from being a fire risk to nearby combustible construction.",
     references: ["450.21(A)"],
     tags: ["transformers", "clearances"],
-    needsReview: true,
   },
   {
     id: "450-010",
