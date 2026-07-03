@@ -1,13 +1,13 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 
-import { HomeDashboard } from "@/components/home/home-dashboard";
+import { TrainingSession } from "@/components/study/training-session";
 
-export default function HomePage() {
+export default function TrainPage() {
   return (
     <>
       <AppShell>
-        <HomeDashboard />
+        <TrainingSession />
       </AppShell>
 
       <BottomNav />
