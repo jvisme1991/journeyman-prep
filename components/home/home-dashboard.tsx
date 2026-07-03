@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BarChart3, BookOpen, ChevronRight, GraduationCap, type LucideIcon } from "lucide-react";
 
 import { getDailyGoalProgress } from "@/lib/progress-stats";
 import { StorageService } from "@/services/storage-service";
@@ -10,6 +11,38 @@ import type { ProgressRecord } from "@/types/progress";
 import { DashboardHeader } from "../dashboard/header";
 import { ContinuePractice } from "./continue-practice";
 import { TodaysGoal } from "./todays-goal";
+
+interface StudyLinkProps {
+  href: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+function StudyLink({ href, icon: Icon, title, description }: StudyLinkProps) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-4 rounded-card border border-border bg-card p-5 shadow-lg shadow-black/20 transition hover:border-accent/50"
+    >
+      <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+        <Icon size={20} />
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <h3 className="text-base font-semibold text-foreground">
+          {title}
+        </h3>
+
+        <p className="mt-0.5 truncate text-sm text-muted-foreground">
+          {description}
+        </p>
+      </div>
+
+      <ChevronRight size={18} className="shrink-0 text-muted-foreground" />
+    </Link>
+  );
+}
 
 export function HomeDashboard() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
@@ -45,61 +78,31 @@ export function HomeDashboard() {
         }
       />
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">
+      <section className="space-y-3">
+        <h2 className="text-2xl font-bold text-foreground">
           Study
         </h2>
 
-        <Link
+        <StudyLink
           href="/learn"
-          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
-        >
-          <h3 className="text-xl font-semibold">
-            Study by NEC Article
-          </h3>
+          icon={BookOpen}
+          title="Study by NEC Article"
+          description="Learn one NEC article at a time with targeted practice questions."
+        />
 
-          <p className="mt-2 text-slate-400">
-            Learn one NEC article at a time with targeted practice questions.
-          </p>
-
-          <div className="mt-5 text-blue-400 font-semibold">
-            Open →
-          </div>
-        </Link>
-
-        <Link
+        <StudyLink
           href="/train"
-          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
-        >
-          <h3 className="text-xl font-semibold">
-            Practice Session
-          </h3>
+          icon={GraduationCap}
+          title="Practice Session"
+          description="Continue answering practice questions and improve your accuracy."
+        />
 
-          <p className="mt-2 text-slate-400">
-            Continue answering practice questions and improve your accuracy.
-          </p>
-
-          <div className="mt-5 text-blue-400 font-semibold">
-            Resume →
-          </div>
-        </Link>
-
-        <Link
+        <StudyLink
           href="/stats"
-          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
-        >
-          <h3 className="text-xl font-semibold">
-            Statistics
-          </h3>
-
-          <p className="mt-2 text-slate-400">
-            Review your performance, accuracy, and weakest NEC articles.
-          </p>
-
-          <div className="mt-5 text-blue-400 font-semibold">
-            View →
-          </div>
-        </Link>
+          icon={BarChart3}
+          title="Statistics"
+          description="Review your performance, accuracy, and weakest NEC articles."
+        />
       </section>
     </div>
   );

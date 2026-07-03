@@ -1,36 +1,63 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — industrial/trade theme. Every screen should pull colors
+ * from these variables (via the Tailwind utilities mapped below) rather
+ * than hardcoding hex values or the default Tailwind slate/blue palette.
+ */
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #15130f;
+  --foreground: #f3f1ea;
 
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
+  --card: #1c1913;
+  --card-foreground: #f3f1ea;
 
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
+  --border: #2a251c;
 
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
+  --muted-foreground: #8a8474;
 
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
+  /* Amber accent — reserve for primary actions, progress fills, and active nav state only. */
+  --accent: #e8940c;
+  --accent-foreground: #15130f;
 
-  --border: #1e293b;
+  --success: #5dcaa5;
+  --success-foreground: #15130f;
 
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --danger: #e24b4a;
+  --danger-foreground: #f3f1ea;
 
-  --radius: 1.25rem;
+  --radius-card: 12px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --radius-card: var(--radius-card);
 }
 
+/*
+ * Tailwind's own preflight (loaded via @import above) already resets `*`
+ * box-sizing/margin/padding and `a { color: inherit }` inside its own
+ * correctly-layered `base` layer — redeclaring those here duplicated them
+ * as unlayered CSS, which silently beat every text-color/accent utility
+ * class in the cascade. Only genuinely custom rules are kept below.
+ */
 html {
   background: var(--background);
   color: var(--foreground);
@@ -39,7 +66,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #0f172a 0%, #020617 65%);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, sans-serif;
 }
@@ -48,17 +75,12 @@ button {
   cursor: pointer;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: var(--border);
   border-radius: 999px;
 }
 
