@@ -6,6 +6,7 @@ import { usePractice } from "@/hooks/usePractice";
 
 import { QuestionCard } from "./question-card";
 import { QuestionFeedback } from "./question-feedback";
+import { QuestionProgress } from "./question-progress";
 import { SessionSummary } from "./session-summary";
 import { SubmitBar } from "./submit-bar";
 
@@ -30,10 +31,10 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
   if (progress.total === 0) {
     return (
-      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center">
-        <h2 className="text-xl font-bold">No Questions Available</h2>
+      <div className="rounded-card border border-border bg-card p-8 text-center">
+        <h2 className="text-xl font-bold text-foreground">No Questions Available</h2>
 
-        <p className="mt-2 text-slate-400">
+        <p className="mt-2 text-muted-foreground">
           {article
             ? `Article ${article} doesn't have any practice questions yet.`
             : "There are no practice questions in the bank yet."}
@@ -41,7 +42,7 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
         <Link
           href="/learn"
-          className="mt-6 inline-block rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+          className="mt-6 inline-block rounded-card bg-accent px-6 py-3 font-semibold text-accent-foreground transition hover:bg-accent/90"
         >
           Back to Learn
         </Link>
@@ -59,7 +60,7 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
         <button
           onClick={restart}
-          className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white hover:bg-blue-700"
+          className="w-full rounded-card bg-accent py-4 text-lg font-semibold text-accent-foreground hover:bg-accent/90"
         >
           Start New Session
         </button>
@@ -69,10 +70,10 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
   return (
     <div className="space-y-6">
+      <QuestionProgress current={progress.current} total={progress.total} />
+
       <QuestionCard
         question={question}
-        currentQuestion={progress.current}
-        totalQuestions={progress.total}
         selectedAnswer={selected}
         submitted={submitted}
         onSelectAnswer={setSelected}
@@ -93,7 +94,7 @@ export function TrainingSession({ article }: TrainingSessionProps) {
 
           <button
             onClick={next}
-            className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white hover:bg-blue-700"
+            className="w-full rounded-card bg-accent py-4 text-lg font-semibold text-accent-foreground hover:bg-accent/90"
           >
             {progress.current === progress.total
               ? "Finish Session"

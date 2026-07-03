@@ -10,26 +10,26 @@ export function QuestionProgress({
   const percent = (current / total) * 100;
 
   return (
-    <div className="mb-8">
+    <div className="mb-6">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
             Practice Session
           </p>
 
-          <h3 className="mt-1 text-lg font-semibold">
+          <h3 className="mt-1 text-lg font-semibold text-foreground">
             Question {current} of {total}
           </h3>
         </div>
 
-        <div className="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300">
+        <div className="rounded-full border border-border px-3 py-1 text-sm font-semibold text-accent">
           {Math.round(percent)}%
         </div>
       </div>
 
-      <div className="h-3 overflow-hidden rounded-full bg-slate-800">
+      <div className="h-3 overflow-hidden rounded-full bg-border">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500"
+          className="h-full rounded-full bg-accent transition-all duration-500"
           style={{
             width: `${percent}%`,
           }}

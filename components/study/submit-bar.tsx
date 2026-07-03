@@ -15,14 +15,14 @@ export function SubmitBar({
       onClick={onSubmit}
       className="
         w-full
-        rounded-2xl
-        bg-blue-600
+        rounded-card
+        bg-accent
         py-4
         text-lg
         font-semibold
-        text-white
+        text-accent-foreground
         transition
-        hover:bg-blue-700
+        hover:bg-accent/90
         disabled:cursor-not-allowed
         disabled:opacity-40
       "

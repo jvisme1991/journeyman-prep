@@ -13,21 +13,21 @@ export function SessionSummary({
     total === 0 ? 0 : Math.round((score / total) * 100);
 
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center">
-      <h2 className="text-3xl font-bold">
+    <div className="rounded-card border border-border bg-card p-8 text-center shadow-lg shadow-black/20">
+      <h2 className="text-3xl font-bold text-foreground">
         Practice Complete
       </h2>
 
-      <p className="mt-2 text-slate-400">
+      <p className="mt-2 text-muted-foreground">
         Great work. Here&apos;s how you did.
       </p>
 
       <div className="mt-8">
-        <div className="text-6xl font-black text-blue-400">
+        <div className="text-6xl font-black text-accent">
           {percent}%
         </div>
 
-        <div className="mt-2 text-xl">
+        <div className="mt-2 text-xl text-foreground">
           {score} / {total} Correct
         </div>
       </div>

@@ -19,45 +19,44 @@ export function AnswerButton({
   disabled = false,
   onClick,
 }: AnswerButtonProps) {
-  let classes =
-    "border-slate-700 hover:border-slate-500 hover:bg-slate-800";
+  let classes = "border-border hover:border-muted-foreground/50 hover:bg-card";
 
   if (selected) {
-    classes = "border-blue-500 bg-blue-500/15";
+    classes = "border-accent bg-accent/15";
   }
 
   if (correct) {
-    classes = "border-green-500 bg-green-500/20";
+    classes = "border-success bg-success/15";
   }
 
   if (incorrect) {
-    classes = "border-red-500 bg-red-500/20";
+    classes = "border-danger bg-danger/15";
   }
 
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`flex w-full items-center gap-4 rounded-2xl border p-5 text-left transition-all duration-200 ${classes}`}
+      className={`flex w-full items-center gap-4 rounded-card border bg-card p-5 text-left transition-all duration-200 ${classes}`}
     >
       <div
         className={`
-          flex h-10 w-10 items-center justify-center rounded-full font-bold
+          flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-bold
           ${
             correct
-              ? "bg-green-600 text-white"
+              ? "bg-success text-success-foreground"
               : incorrect
-              ? "bg-red-600 text-white"
+              ? "bg-danger text-danger-foreground"
               : selected
-              ? "bg-blue-600 text-white"
-              : "bg-slate-800 text-slate-300"
+              ? "bg-accent text-accent-foreground"
+              : "bg-border text-muted-foreground"
           }
         `}
       >
         {letter}
       </div>
 
-      <span className="flex-1 text-base">
+      <span className="flex-1 text-base text-foreground">
         {text}
       </span>
     </button>

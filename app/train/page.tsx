@@ -14,11 +14,11 @@ export default async function TrainPage({ searchParams }: TrainPageProps) {
       <AppShell>
         <div className="space-y-8">
           <div>
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-4xl font-bold text-foreground">
               Practice
             </h1>
 
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 text-muted-foreground">
               {article
                 ? `Practicing NEC Article ${article} questions.`
                 : "Test your knowledge with randomized NEC questions."}
