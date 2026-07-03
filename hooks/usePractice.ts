@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { PracticeService } from "../services/practice-service";
 
@@ -10,14 +10,45 @@ interface PracticeResult {
   explanation: string;
 }
 
-export function usePractice() {
-  const service = useMemo(() => new PracticeService(), []);
+interface PracticeState {
+  service: PracticeService;
+  question: ReturnType<PracticeService["getCurrentQuestion"]>;
+  progress: ReturnType<PracticeService["getProgress"]>;
+}
 
-  const [question, setQuestion] = useState(service.getCurrentQuestion());
+function buildState(article?: string): PracticeState {
+  const service = new PracticeService(article);
+
+  return {
+    service,
+    question: service.getCurrentQuestion(),
+    progress: service.getProgress(),
+  };
+}
+
+export function usePractice(article?: string) {
+  const [state, setState] = useState(() => buildState(article));
   const [selected, setSelected] = useState<number>();
   const [result, setResult] = useState<PracticeResult>();
-  const [progress, setProgress] = useState(service.getProgress());
   const [completed, setCompleted] = useState(false);
+
+  // Skip the effect on mount: initial state is already built above. Only
+  // rebuild the session when `article` changes on a later render.
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    setState(buildState(article));
+    setSelected(undefined);
+    setResult(undefined);
+    setCompleted(false);
+  }, [article]);
+
+  const { service, question, progress } = state;
 
   function submit() {
     if (selected === undefined) return;
@@ -25,7 +56,7 @@ export function usePractice() {
     const response = service.submitAnswer(selected);
 
     setResult(response);
-    setProgress(service.getProgress());
+    setState((prev) => ({ ...prev, progress: service.getProgress() }));
   }
 
   function next() {
@@ -36,19 +67,19 @@ export function usePractice() {
       return;
     }
 
-    setQuestion(service.getCurrentQuestion());
     setSelected(undefined);
     setResult(undefined);
-    setProgress(service.getProgress());
+    setState((prev) => ({
+      ...prev,
+      question: service.getCurrentQuestion(),
+      progress: service.getProgress(),
+    }));
   }
 
   function restart() {
-    const newService = new PracticeService();
-
-    setQuestion(newService.getCurrentQuestion());
+    setState(buildState(article));
     setSelected(undefined);
     setResult(undefined);
-    setProgress(newService.getProgress());
     setCompleted(false);
   }
 

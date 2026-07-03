@@ -1,19 +1,49 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { getDailyGoalProgress } from "@/lib/progress-stats";
+import { StorageService } from "@/services/storage-service";
+import type { ProgressRecord } from "@/types/progress";
 
 import { DashboardHeader } from "../dashboard/header";
 import { ContinuePractice } from "./continue-practice";
 import { TodaysGoal } from "./todays-goal";
 
 export function HomeDashboard() {
+  const [progress, setProgress] = useState<ProgressRecord | null>(null);
+
+  // One-time client-only hydration read: localStorage isn't available on
+  // the server, so progress is loaded after mount rather than on first
+  // render to avoid a server/client markup mismatch.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setProgress(StorageService.load());
+  }, []);
+
+  const dailyGoal = progress
+    ? getDailyGoalProgress(progress)
+    : { goal: 25, completed: 0 };
+
+  const activeSession = progress?.activeSession ?? null;
+
   return (
     <div className="space-y-8">
       <DashboardHeader />
 
-      <TodaysGoal completed={8} goal={25} />
+      <TodaysGoal completed={dailyGoal.completed} goal={dailyGoal.goal} />
 
-      <ContinuePractice current={1} total={25} />
+      <ContinuePractice
+        hasSession={activeSession !== null}
+        current={activeSession ? activeSession.currentIndex + 1 : 0}
+        total={activeSession ? activeSession.questionIds.length : 0}
+        href={
+          activeSession?.article
+            ? `/train?article=${activeSession.article}`
+            : "/train"
+        }
+      />
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">

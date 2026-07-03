@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { usePractice } from "@/hooks/usePractice";
 
 import { QuestionCard } from "./question-card";
@@ -7,7 +9,11 @@ import { QuestionFeedback } from "./question-feedback";
 import { SessionSummary } from "./session-summary";
 import { SubmitBar } from "./submit-bar";
 
-export function TrainingSession() {
+interface TrainingSessionProps {
+  article?: string;
+}
+
+export function TrainingSession({ article }: TrainingSessionProps) {
   const {
     question,
     selected,
@@ -18,9 +24,30 @@ export function TrainingSession() {
     result,
     progress,
     completed,
-  } = usePractice();
+  } = usePractice(article);
 
   const submitted = result !== undefined;
+
+  if (progress.total === 0) {
+    return (
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center">
+        <h2 className="text-xl font-bold">No Questions Available</h2>
+
+        <p className="mt-2 text-slate-400">
+          {article
+            ? `Article ${article} doesn't have any practice questions yet.`
+            : "There are no practice questions in the bank yet."}
+        </p>
+
+        <Link
+          href="/learn"
+          className="mt-6 inline-block rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+        >
+          Back to Learn
+        </Link>
+      </div>
+    );
+  }
 
   if (completed) {
     return (

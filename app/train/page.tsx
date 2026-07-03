@@ -2,7 +2,13 @@ import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 import { TrainingSession } from "@/components/study/training-session";
 
-export default function TrainPage() {
+interface TrainPageProps {
+  searchParams: Promise<{ article?: string }>;
+}
+
+export default async function TrainPage({ searchParams }: TrainPageProps) {
+  const { article } = await searchParams;
+
   return (
     <>
       <AppShell>
@@ -13,11 +19,13 @@ export default function TrainPage() {
             </h1>
 
             <p className="mt-2 text-slate-400">
-              Test your knowledge with randomized NEC questions.
+              {article
+                ? `Practicing NEC Article ${article} questions.`
+                : "Test your knowledge with randomized NEC questions."}
             </p>
           </div>
 
-          <TrainingSession />
+          <TrainingSession article={article} />
         </div>
       </AppShell>
 

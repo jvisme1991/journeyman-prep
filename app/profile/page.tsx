@@ -1,7 +1,11 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
+import { ProfileProgress } from "@/components/profile/profile-progress";
+import { questionRepository } from "@/services/question-repository";
 
 export default function ProfilePage() {
+  const questionBankSize = questionRepository.getAll().length;
+
   return (
     <>
       <AppShell>
@@ -21,14 +25,11 @@ export default function ProfilePage() {
                 value="Texas Journeyman (2023 NEC)"
               />
 
-              <Setting
-                label="Daily Goal"
-                value="25 Questions"
-              />
+              <ProfileProgress />
 
               <Setting
                 label="Question Bank"
-                value="12 Questions"
+                value={`${questionBankSize} Questions`}
               />
 
               <Setting

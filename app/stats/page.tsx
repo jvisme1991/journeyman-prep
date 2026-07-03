@@ -1,5 +1,6 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
+import { ProgressOverview } from "@/components/stats/progress-overview";
 import { questions } from "@/data/questions";
 
 export default function StatsPage() {
@@ -17,15 +18,21 @@ export default function StatsPage() {
             <h1 className="text-4xl font-bold">Statistics</h1>
 
             <p className="mt-2 text-slate-400">
-              Current question bank status.
+              Track your progress and review the question bank.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <StatCard title="Questions" value={total} />
-            <StatCard title="Articles" value={articles} />
-            <StatCard title="Easy" value={easy} />
-            <StatCard title="Medium / Hard" value={`${medium} / ${hard}`} />
+          <ProgressOverview />
+
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Question Bank</h2>
+
+            <div className="grid grid-cols-2 gap-4">
+              <StatCard title="Questions" value={total} />
+              <StatCard title="Articles" value={articles} />
+              <StatCard title="Easy" value={easy} />
+              <StatCard title="Medium / Hard" value={`${medium} / ${hard}`} />
+            </div>
           </div>
         </div>
       </AppShell>

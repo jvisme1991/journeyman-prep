@@ -3,15 +3,19 @@
 import Link from "next/link";
 
 interface ContinuePracticeProps {
+  hasSession: boolean;
   current: number;
   total: number;
+  href: string;
 }
 
 export function ContinuePractice({
+  hasSession,
   current,
   total,
+  href,
 }: ContinuePracticeProps) {
-  const percent = Math.round((current / total) * 100);
+  const percent = total === 0 ? 0 : Math.round((current / total) * 100);
 
   return (
     <section className="rounded-3xl border border-slate-800 bg-slate-900 p-6">
@@ -20,8 +24,16 @@ export function ContinuePractice({
       </p>
 
       <h2 className="mt-3 text-3xl font-bold">
-        Question {current} of {total}
+        {hasSession
+          ? `Question ${current} of ${total}`
+          : "No Session in Progress"}
       </h2>
+
+      {!hasSession && (
+        <p className="mt-2 text-sm text-slate-400">
+          Start a practice session to track your progress here.
+        </p>
+      )}
 
       <div className="mt-5 h-3 overflow-hidden rounded-full bg-slate-800">
         <div
@@ -33,10 +45,10 @@ export function ContinuePractice({
       </div>
 
       <Link
-        href="/train"
+        href={href}
         className="mt-6 block w-full rounded-2xl bg-blue-600 py-4 text-center text-lg font-semibold transition hover:bg-blue-700"
       >
-        Resume Session →
+        {hasSession ? "Resume Session →" : "Start Practice →"}
       </Link>
     </section>
   );
