@@ -8,11 +8,10 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ article }: ArticleCardProps) {
+  const disabled = article.questionCount === 0;
+
   return (
-    <Link
-      href={`/train?article=${article.number}`}
-      className="block w-full rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:border-blue-500"
-    >
+    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-xl font-bold">
@@ -24,14 +23,25 @@ export function ArticleCard({ article }: ArticleCardProps) {
           </p>
         </div>
 
-        <div className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-semibold text-blue-400">
+        <span className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-semibold text-blue-400">
           {article.questionCount}
-        </div>
+        </span>
       </div>
 
-      <div className="mt-5 text-sm text-slate-500">
-        {article.questionCount} Questions
+      <div className="mt-5">
+        {disabled ? (
+          <div className="rounded-xl bg-slate-800 px-4 py-3 text-center text-sm text-slate-500">
+            No questions available
+          </div>
+        ) : (
+          <Link
+            href={`/train?article=${article.number}`}
+            className="block rounded-xl bg-blue-600 py-3 text-center font-semibold transition hover:bg-blue-700"
+          >
+            Study Article →
+          </Link>
+        )}
       </div>
-    </Link>
+    </div>
   );
 }

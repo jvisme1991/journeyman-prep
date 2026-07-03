@@ -1,11 +1,11 @@
 "use client";
 
-import { usePractice } from "../../hooks/usePractice";
+import { usePractice } from "@/hooks/usePractice";
 
 import { QuestionCard } from "./question-card";
-import { SubmitBar } from "./submit-bar";
 import { QuestionFeedback } from "./question-feedback";
 import { SessionSummary } from "./session-summary";
+import { SubmitBar } from "./submit-bar";
 
 export function TrainingSession() {
   const {
@@ -32,9 +32,9 @@ export function TrainingSession() {
 
         <button
           onClick={restart}
-          className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white transition hover:bg-blue-700"
+          className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white hover:bg-blue-700"
         >
-          Start New Practice Session
+          Start New Session
         </button>
       </div>
     );
@@ -61,11 +61,12 @@ export function TrainingSession() {
           <QuestionFeedback
             correct={result.correct}
             explanation={result.explanation}
+            references={question.references}
           />
 
           <button
             onClick={next}
-            className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white transition hover:bg-blue-700"
+            className="w-full rounded-2xl bg-blue-600 py-4 text-lg font-semibold text-white hover:bg-blue-700"
           >
             {progress.current === progress.total
               ? "Finish Session"

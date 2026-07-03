@@ -1,27 +1,52 @@
+"use client";
+
 interface QuestionFeedbackProps {
   correct: boolean;
   explanation: string;
+  references?: string[];
 }
 
 export function QuestionFeedback({
   correct,
   explanation,
+  references = [],
 }: QuestionFeedbackProps) {
   return (
-    <div
-      className={`mt-6 rounded-2xl border p-5 ${
-        correct
-          ? "border-green-600 bg-green-600/10"
-          : "border-red-600 bg-red-600/10"
-      }`}
-    >
-      <h3 className="mb-2 text-lg font-bold">
-        {correct ? "✅ Correct" : "❌ Incorrect"}
-      </h3>
+    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+      <div
+        className={`text-xl font-bold ${
+          correct ? "text-green-400" : "text-red-400"
+        }`}
+      >
+        {correct ? "✓ Correct" : "✗ Incorrect"}
+      </div>
 
-      <p className="text-slate-300">
-        {explanation}
-      </p>
+      <div className="mt-6">
+        <h3 className="font-semibold">Explanation</h3>
+
+        <p className="mt-2 text-slate-300 leading-7">
+          {explanation}
+        </p>
+      </div>
+
+      {references.length > 0 && (
+        <div className="mt-6">
+          <h3 className="font-semibold">
+            NEC Reference
+          </h3>
+
+          <div className="mt-2 flex flex-wrap gap-2">
+            {references.map((reference) => (
+              <span
+                key={reference}
+                className="rounded-lg bg-blue-500/10 px-3 py-2 text-sm font-medium text-blue-400"
+              >
+                {reference}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

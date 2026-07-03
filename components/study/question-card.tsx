@@ -1,17 +1,16 @@
 "use client";
 
-import type { Question } from "../../types/question";
+import type { Question } from "@/types/question";
 
 import { AnswerButton } from "./answer-button";
-import { QuestionProgress } from "./question-progress";
 
 interface QuestionCardProps {
   question: Question;
   currentQuestion: number;
   totalQuestions: number;
   selectedAnswer?: number;
-  submitted?: boolean;
-  onSelectAnswer: (index: number) => void;
+  submitted: boolean;
+  onSelectAnswer: (answer: number) => void;
 }
 
 export function QuestionCard({
@@ -19,49 +18,42 @@ export function QuestionCard({
   currentQuestion,
   totalQuestions,
   selectedAnswer,
-  submitted = false,
+  submitted,
   onSelectAnswer,
 }: QuestionCardProps) {
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6">
-      <QuestionProgress
-        current={currentQuestion}
-        total={totalQuestions}
-      />
+    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+      <div className="flex items-center justify-between">
+        <span className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-semibold text-blue-400">
+          Question {currentQuestion} / {totalQuestions}
+        </span>
 
-      <div className="mb-6">
-        <div className="mb-3 inline-flex rounded-full bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400">
-          NEC Article {question.article}
+        <span className="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-300">
+          Article {question.article}
+        </span>
+      </div>
+
+      <div className="mt-4">
+        <div className="text-sm font-medium uppercase tracking-wide text-slate-400">
+          {question.topic}
         </div>
 
-        <h2 className="text-2xl font-bold leading-tight">
+        <h2 className="mt-2 text-2xl font-bold leading-8">
           {question.question}
         </h2>
       </div>
 
-      <div className="space-y-3">
-        {question.answers.map((answer, index) => {
-          const isCorrect =
-            submitted && index === question.correctAnswer;
-
-          const isIncorrect =
-            submitted &&
-            selectedAnswer === index &&
-            index !== question.correctAnswer;
-
-          return (
-            <AnswerButton
-              key={index}
-              letter={String.fromCharCode(65 + index)}
-              text={answer}
-              selected={!submitted && selectedAnswer === index}
-              correct={isCorrect}
-              incorrect={isIncorrect}
-              disabled={submitted}
-              onClick={() => onSelectAnswer(index)}
-            />
-          );
-        })}
+      <div className="mt-8 space-y-3">
+        {question.answers.map((answer, index) => (
+          <AnswerButton
+            key={index}
+            letter={String.fromCharCode(65 + index)}
+            text={answer}
+            selected={selectedAnswer === index}
+            disabled={submitted}
+            onClick={() => onSelectAnswer(index)}
+          />
+        ))}
       </div>
     </div>
   );
