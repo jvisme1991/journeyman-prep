@@ -1,7 +1,5 @@
-export interface NecArticle {
-  id: string;
+export interface Article {
+  number: string;
   title: string;
-  chapter: number;
   questionCount: number;
-  completed: number;
 }

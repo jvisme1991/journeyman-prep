@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { DashboardHeader } from "../dashboard/header";
 import { ContinuePractice } from "./continue-practice";
 import { TodaysGoal } from "./todays-goal";
@@ -9,44 +11,65 @@ export function HomeDashboard() {
     <div className="space-y-8">
       <DashboardHeader />
 
-      <TodaysGoal
-        completed={8}
-        goal={25}
-      />
+      <TodaysGoal completed={8} goal={25} />
 
-      <ContinuePractice
-        current={1}
-        total={25}
-      />
+      <ContinuePractice current={1} total={25} />
 
-      <section className="grid grid-cols-2 gap-4">
-        <button className="rounded-2xl border border-slate-800 bg-slate-900 p-5 text-left transition hover:border-blue-500">
-          <div className="text-2xl">📚</div>
-          <div className="mt-3 font-semibold">
-            Study by Article
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold">
+          Study
+        </h2>
+
+        <Link
+          href="/learn"
+          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
+        >
+          <h3 className="text-xl font-semibold">
+            Study by NEC Article
+          </h3>
+
+          <p className="mt-2 text-slate-400">
+            Learn one NEC article at a time with targeted practice questions.
+          </p>
+
+          <div className="mt-5 text-blue-400 font-semibold">
+            Open →
           </div>
-        </button>
+        </Link>
 
-        <button className="rounded-2xl border border-slate-800 bg-slate-900 p-5 text-left transition hover:border-blue-500">
-          <div className="text-2xl">📝</div>
-          <div className="mt-3 font-semibold">
-            Timed Exam
-          </div>
-        </button>
+        <Link
+          href="/train"
+          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
+        >
+          <h3 className="text-xl font-semibold">
+            Practice Session
+          </h3>
 
-        <button className="rounded-2xl border border-slate-800 bg-slate-900 p-5 text-left transition hover:border-blue-500">
-          <div className="text-2xl">⭐</div>
-          <div className="mt-3 font-semibold">
-            Missed Questions
-          </div>
-        </button>
+          <p className="mt-2 text-slate-400">
+            Continue answering practice questions and improve your accuracy.
+          </p>
 
-        <button className="rounded-2xl border border-slate-800 bg-slate-900 p-5 text-left transition hover:border-blue-500">
-          <div className="text-2xl">🧠</div>
-          <div className="mt-3 font-semibold">
-            Flashcards
+          <div className="mt-5 text-blue-400 font-semibold">
+            Resume →
           </div>
-        </button>
+        </Link>
+
+        <Link
+          href="/stats"
+          className="block rounded-3xl border border-slate-800 bg-slate-900 p-6 transition hover:border-blue-500"
+        >
+          <h3 className="text-xl font-semibold">
+            Statistics
+          </h3>
+
+          <p className="mt-2 text-slate-400">
+            Review your performance, accuracy, and weakest NEC articles.
+          </p>
+
+          <div className="mt-5 text-blue-400 font-semibold">
+            View →
+          </div>
+        </Link>
       </section>
     </div>
   );

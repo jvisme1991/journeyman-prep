@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { practiceService } from "../services/practice-service";
+import { useMemo, useState } from "react";
+
+import { PracticeService } from "../services/practice-service";
 
 interface PracticeResult {
   correct: boolean;
@@ -10,50 +11,44 @@ interface PracticeResult {
 }
 
 export function usePractice() {
-  const [question, setQuestion] = useState(
-    practiceService.getCurrentQuestion()
-  );
+  const service = useMemo(() => new PracticeService(), []);
 
+  const [question, setQuestion] = useState(service.getCurrentQuestion());
   const [selected, setSelected] = useState<number>();
-
   const [result, setResult] = useState<PracticeResult>();
-
-  const [progress, setProgress] = useState(
-    practiceService.getProgress()
-  );
-
+  const [progress, setProgress] = useState(service.getProgress());
   const [completed, setCompleted] = useState(false);
 
   function submit() {
     if (selected === undefined) return;
 
-    const response = practiceService.submitAnswer(selected);
+    const response = service.submitAnswer(selected);
 
     setResult(response);
-    setProgress(practiceService.getProgress());
+    setProgress(service.getProgress());
   }
 
   function next() {
-    const hasNext = practiceService.nextQuestion();
+    const hasNext = service.nextQuestion();
 
     if (!hasNext) {
       setCompleted(true);
       return;
     }
 
-    setQuestion(practiceService.getCurrentQuestion());
+    setQuestion(service.getCurrentQuestion());
     setSelected(undefined);
     setResult(undefined);
-    setProgress(practiceService.getProgress());
+    setProgress(service.getProgress());
   }
 
   function restart() {
-    practiceService.reset();
+    const newService = new PracticeService();
 
-    setQuestion(practiceService.getCurrentQuestion());
+    setQuestion(newService.getCurrentQuestion());
     setSelected(undefined);
     setResult(undefined);
-    setProgress(practiceService.getProgress());
+    setProgress(newService.getProgress());
     setCompleted(false);
   }
 

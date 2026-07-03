@@ -1,6 +1,6 @@
 "use client";
 
-import { necArticles } from "../../data/articles";
+import { articles } from "@/data/articles";
 import { ArticleCard } from "./article-card";
 
 export function ArticleGrid() {
@@ -19,9 +19,9 @@ export function ArticleGrid() {
       </div>
 
       <div className="space-y-4">
-        {necArticles.map((article) => (
+        {articles.map((article) => (
           <ArticleCard
-            key={article.id}
+            key={article.number}
             article={article}
           />
         ))}

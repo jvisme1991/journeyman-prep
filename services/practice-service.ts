@@ -1,11 +1,16 @@
 import { questionRepository } from "./question-repository";
+import type { Question } from "@/types/question";
 
-class PracticeService {
-  private questionPool = questionRepository.getRandom(25);
-
+export class PracticeService {
+  private questionPool: Question[];
   private currentIndex = 0;
-
   private score = 0;
+
+  constructor(article?: string) {
+    this.questionPool = article
+      ? questionRepository.getByArticle(article)
+      : questionRepository.getRandom(25);
+  }
 
   getCurrentQuestion() {
     return this.questionPool[this.currentIndex];
@@ -14,8 +19,7 @@ class PracticeService {
   submitAnswer(answer: number) {
     const question = this.getCurrentQuestion();
 
-    const correct =
-      answer === question.correctAnswer;
+    const correct = answer === question.correctAnswer;
 
     if (correct) {
       this.score++;
@@ -34,7 +38,6 @@ class PracticeService {
     }
 
     this.currentIndex++;
-
     return true;
   }
 
@@ -45,12 +48,10 @@ class PracticeService {
       score: this.score,
     };
   }
-
-  reset() {
-    this.currentIndex = 0;
-    this.score = 0;
-    this.questionPool = questionRepository.getRandom(25);
-  }
 }
 
+/*
+ * This singleton keeps the existing app working.
+ * usePractice.ts imports this.
+ */
 export const practiceService = new PracticeService();
