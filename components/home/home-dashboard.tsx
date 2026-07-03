@@ -2,7 +2,7 @@
 
 import { DashboardHeader } from "../dashboard/header";
 import { ContinuePractice } from "./continue-practice";
-import { TodaysGoal } from "./todays-goal.tsx";
+import { TodaysGoal } from "./todays-goal";
 
 export function HomeDashboard() {
   return (

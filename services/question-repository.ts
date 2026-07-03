@@ -1,23 +1,23 @@
-import article250 from "../data/articles/article-250.json";
-import type { Question } from "../types/question";
+import { questions } from "@/data/questions";
+import type { Question } from "@/types/question";
 
 class QuestionRepository {
   private readonly questions: Question[];
 
   constructor() {
-    this.questions = [
-      ...(article250 as Question[]),
-    ];
+    this.questions = questions;
   }
 
   getAll(): Question[] {
     return this.questions;
   }
 
+  getById(id: string): Question | undefined {
+    return this.questions.find((q) => q.id === id);
+  }
+
   getByArticle(article: string): Question[] {
-    return this.questions.filter(
-      (q) => q.article === article
-    );
+    return this.questions.filter((q) => q.article === article);
   }
 
   getByDifficulty(
@@ -27,28 +27,11 @@ class QuestionRepository {
       (q) => q.difficulty === difficulty
     );
   }
-
-  getById(id: string): Question | undefined {
-    return this.questions.find(
-      (q) => q.id === id
-    );
-  }
-
   getRandom(count: number): Question[] {
-    const shuffled = [...this.questions];
+  const shuffled = [...this.questions].sort(() => Math.random() - 0.5);
 
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [shuffled[i], shuffled[j]] = [
-        shuffled[j],
-        shuffled[i],
-      ];
-    }
-
-    return shuffled.slice(0, count);
-  }
+  return shuffled.slice(0, count);
+}
 }
 
-export const questionRepository =
-  new QuestionRepository();
+export const questionRepository = new QuestionRepository();

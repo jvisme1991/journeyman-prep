@@ -14,8 +14,7 @@ export const questions: Question[] = [
 
     difficulty: "easy",
 
-    question:
-      "Which NEC article primarily covers grounding and bonding?",
+    question: "Which NEC article primarily covers grounding and bonding?",
 
     answers: [
       "Article 210",
@@ -26,8 +25,7 @@ export const questions: Question[] = [
 
     correctAnswer: 2,
 
-    explanation:
-      "Article 250 contains the grounding and bonding requirements of the NEC.",
+    explanation: "Article 250 contains the grounding and bonding requirements of the NEC.",
 
     references: ["250"],
 

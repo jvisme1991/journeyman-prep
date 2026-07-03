@@ -14,7 +14,7 @@
       "Article 430"
     ],
     "correctAnswer": 2,
-    "explanation": "Article 250 contains the grounding and bonding requirements of the National Electrical Code.",
+    "explanation": "Article 250 contains the grounding and bonding requirements of the NEC.",
     "references": [
       "250.4(A)(5)"
     ],
@@ -31,21 +31,21 @@
     "chapter": 2,
     "topic": "Grounding",
     "difficulty": "easy",
-    "question": "One purpose of grounding electrical systems is to:",
+    "question": "What is one purpose of grounding electrical systems?",
     "answers": [
-      "Increase circuit voltage",
-      "Limit voltage imposed by lightning and line surges",
-      "Reduce conductor resistance",
-      "Increase available fault current"
+      "Increase voltage",
+      "Limit voltage imposed by lightning and surges",
+      "Reduce conductor size",
+      "Increase current flow"
     ],
     "correctAnswer": 1,
-    "explanation": "NEC 250.4(A)(1) states that grounding helps limit the voltage imposed by lightning, line surges, and accidental contact with higher-voltage lines.",
+    "explanation": "Grounding helps limit voltage from lightning, line surges, and accidental contact with higher-voltage lines.",
     "references": [
       "250.4(A)(1)"
     ],
     "tags": [
       "grounding",
-      "purpose"
+      "lightning"
     ]
   },
   {
@@ -55,15 +55,15 @@
     "chapter": 2,
     "topic": "Bonding",
     "difficulty": "easy",
-    "question": "Bonding of conductive materials is intended to:",
+    "question": "Why are normally non-current-carrying metal parts bonded together?",
     "answers": [
-      "Increase resistance",
-      "Create an effective ground-fault current path",
-      "Lower utility voltage",
-      "Eliminate overcurrent devices"
+      "To increase voltage",
+      "To create an effective ground-fault current path",
+      "To reduce resistance for normal current",
+      "To improve power factor"
     ],
     "correctAnswer": 1,
-    "explanation": "Bonding creates an effective ground-fault current path capable of safely carrying fault current.",
+    "explanation": "Bonding creates an effective ground-fault current path to facilitate operation of the overcurrent protective device.",
     "references": [
       "250.4(A)(3)"
     ],
