@@ -1,6 +1,9 @@
+import { BookOpen, GraduationCap, Tag } from "lucide-react";
+
 import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 import { ProfileProgress } from "@/components/profile/profile-progress";
+import { SettingRow } from "@/components/profile/setting-row";
 import { questionRepository } from "@/services/question-repository";
 
 export default function ProfilePage() {
@@ -11,31 +14,30 @@ export default function ProfilePage() {
       <AppShell>
         <div className="space-y-8">
           <div>
-            <h1 className="text-4xl font-bold">Profile</h1>
+            <h1 className="text-4xl font-bold text-foreground">Profile</h1>
 
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 text-muted-foreground">
               Study preferences.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+          <div className="rounded-card border border-border bg-card p-6 shadow-lg shadow-black/20">
             <div className="space-y-5">
-              <Setting
+              <SettingRow
+                icon={GraduationCap}
                 label="Exam"
                 value="Texas Journeyman (2023 NEC)"
               />
 
               <ProfileProgress />
 
-              <Setting
+              <SettingRow
+                icon={BookOpen}
                 label="Question Bank"
                 value={`${questionBankSize} Questions`}
               />
 
-              <Setting
-                label="Current Version"
-                value="v0.1"
-              />
+              <SettingRow icon={Tag} label="Current Version" value="v0.1" />
             </div>
           </div>
         </div>
@@ -43,25 +45,5 @@ export default function ProfilePage() {
 
       <BottomNav />
     </>
-  );
-}
-
-function Setting({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-center justify-between border-b border-slate-800 pb-4 last:border-b-0 last:pb-0">
-      <span className="text-slate-400">
-        {label}
-      </span>
-
-      <span className="font-semibold">
-        {value}
-      </span>
-    </div>
   );
 }

@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ListChecks, Percent, Target } from "lucide-react";
 
 import { getDashboardStats } from "@/lib/progress-stats";
 import { StorageService } from "@/services/storage-service";
 import type { ProgressRecord } from "@/types/progress";
+
+import { SettingRow } from "./setting-row";
 
 export function ProfileProgress() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
@@ -43,38 +46,28 @@ export function ProfileProgress() {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-        <span className="text-slate-400">Daily Goal</span>
-
+      <SettingRow icon={Target} label="Daily Goal">
         <div className="flex items-center gap-2">
           <input
             type="number"
             min={1}
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
-            className="w-16 rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-right font-semibold text-slate-100 focus:border-blue-500 focus:outline-none"
+            className="w-16 rounded-lg border border-border bg-background px-2 py-1 text-right font-semibold text-foreground focus:border-accent focus:outline-none"
           />
 
           <button
             onClick={handleSave}
-            className="rounded-lg bg-blue-600 px-3 py-1 text-sm font-semibold text-white transition hover:bg-blue-700"
+            className="rounded-lg bg-accent px-3 py-1 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90"
           >
             {saved ? "Saved" : "Save"}
           </button>
         </div>
-      </div>
+      </SettingRow>
 
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-        <span className="text-slate-400">Total Answered</span>
+      <SettingRow icon={ListChecks} label="Total Answered" value={String(stats.questionsAnswered)} />
 
-        <span className="font-semibold">{stats.questionsAnswered}</span>
-      </div>
-
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-        <span className="text-slate-400">Accuracy</span>
-
-        <span className="font-semibold">{stats.accuracy}%</span>
-      </div>
+      <SettingRow icon={Percent} label="Accuracy" value={`${stats.accuracy}%`} />
     </>
   );
 }
