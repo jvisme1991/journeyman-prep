@@ -1,0 +1,75 @@
+[
+  {
+    "id": "250-001",
+    "article": "250",
+    "section": "250.4(A)(5)",
+    "chapter": 2,
+    "topic": "Grounding & Bonding",
+    "difficulty": "easy",
+    "question": "Which NEC article primarily covers grounding and bonding?",
+    "answers": [
+      "Article 210",
+      "Article 220",
+      "Article 250",
+      "Article 430"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Article 250 contains the grounding and bonding requirements of the National Electrical Code.",
+    "references": [
+      "250.4(A)(5)"
+    ],
+    "tags": [
+      "grounding",
+      "bonding",
+      "chapter-2"
+    ]
+  },
+  {
+    "id": "250-002",
+    "article": "250",
+    "section": "250.4(A)(1)",
+    "chapter": 2,
+    "topic": "Grounding",
+    "difficulty": "easy",
+    "question": "One purpose of grounding electrical systems is to:",
+    "answers": [
+      "Increase circuit voltage",
+      "Limit voltage imposed by lightning and line surges",
+      "Reduce conductor resistance",
+      "Increase available fault current"
+    ],
+    "correctAnswer": 1,
+    "explanation": "NEC 250.4(A)(1) states that grounding helps limit the voltage imposed by lightning, line surges, and accidental contact with higher-voltage lines.",
+    "references": [
+      "250.4(A)(1)"
+    ],
+    "tags": [
+      "grounding",
+      "purpose"
+    ]
+  },
+  {
+    "id": "250-003",
+    "article": "250",
+    "section": "250.4(A)(3)",
+    "chapter": 2,
+    "topic": "Bonding",
+    "difficulty": "easy",
+    "question": "Bonding of conductive materials is intended to:",
+    "answers": [
+      "Increase resistance",
+      "Create an effective ground-fault current path",
+      "Lower utility voltage",
+      "Eliminate overcurrent devices"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Bonding creates an effective ground-fault current path capable of safely carrying fault current.",
+    "references": [
+      "250.4(A)(3)"
+    ],
+    "tags": [
+      "bonding",
+      "fault-current"
+    ]
+  }
+]
