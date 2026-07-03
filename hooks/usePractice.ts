@@ -22,6 +22,8 @@ export function usePractice() {
     practiceService.getProgress()
   );
 
+  const [completed, setCompleted] = useState(false);
+
   function submit() {
     if (selected === undefined) return;
 
@@ -34,12 +36,25 @@ export function usePractice() {
   function next() {
     const hasNext = practiceService.nextQuestion();
 
-    if (!hasNext) return;
+    if (!hasNext) {
+      setCompleted(true);
+      return;
+    }
 
     setQuestion(practiceService.getCurrentQuestion());
     setSelected(undefined);
     setResult(undefined);
     setProgress(practiceService.getProgress());
+  }
+
+  function restart() {
+    practiceService.reset();
+
+    setQuestion(practiceService.getCurrentQuestion());
+    setSelected(undefined);
+    setResult(undefined);
+    setProgress(practiceService.getProgress());
+    setCompleted(false);
   }
 
   return {
@@ -48,7 +63,9 @@ export function usePractice() {
     setSelected,
     submit,
     next,
+    restart,
     result,
     progress,
+    completed,
   };
 }
