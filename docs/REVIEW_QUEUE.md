@@ -1,143 +1,151 @@
 # Review Queue
 
-**✅ Review pass completed.** All 30 items below have been verified directly against the 2023 NEC PDF. 24 were confirmed correct as originally written. 6 needed a fix — 4 citation-only (the answer/value was right, only the cited section number was wrong) and 2 content corrections (the answer itself was wrong or conflated two provisions). All 6 have been corrected in `data/questions.ts` and their `needsReview: true` flags removed; each corrected item below is marked accordingly.
-
-This was the list of every question in `data/questions.ts` that had been marked `needsReview: true` — content authored without full confidence in the exact citation or correctness, mostly numeric table/formula values from the 2023 NEC.
+This is the list of every question in `data/questions.ts` currently marked `needsReview: true` — content authored without full confidence in the exact citation or correctness, mostly numeric table/formula values from the 2023 NEC. All 32 items are from the most recent content batch (Articles 215, 250, 310, 314, 430, 450, brought up to 15 questions each).
 
 **Workflow:** Check an item off here once you've confirmed it against the actual 2023 NEC. Once checked off, the corresponding `needsReview: true` field on that question in `data/questions.ts` should be removed (the entry can just stay checked here as a record). If a question turns out to be wrong rather than just unconfirmed, let me know instead of checking it off and I'll correct it.
 
 Within each article, items are ordered most-consequential first — a numeric value used to size or install something ranks above a wording/labeling nuance.
 
-Total flagged: **30** questions across 5 articles (110, 220, 230, 240, 300) — **0 remaining**, all resolved.
+Total flagged: **32** questions across 6 articles (215, 250, 310, 314, 430, 450).
 
 ---
 
-## Article 110 (2)
+## Article 215 (2)
 
-- [x] **110-011** — Table 110.26(A)(1) working space depth, 151–600V, Condition 3
-  Citation: `Table 110.26(A)(1)` · Marked correct: **4 feet (1.2 m)**
-  Unsure about: Double-check the exact depth for Condition 3 at 151–600V — confirm it's 4 ft and not 3.5 ft, and that the 0–150V / 151–600V voltage-band split is still current for 2023.
+- [ ] **215-005** — 215.4(A) common neutral, "two or three sets" limit
+  Citation: `215.4(A)` · Marked correct: "Up to two or three sets of feeder conductors installed in the same raceway or cable"
+  Unsure about: Confirm the "two or three sets" figure and that installing them in the same raceway/cable is indeed a condition of this allowance.
 
-- [x] **110-014** — 110.26(E) dedicated equipment space, what it's reserved for
-  Citation: `110.26(E)` · Marked correct: "Be reserved for the electrical installation, generally excluding foreign systems like piping and ductwork"
-  Unsure about: Confirm the dedicated space's vertical extent (commonly cited as 6 ft above the equipment or to the structural ceiling) and whether foreign systems are fully prohibited there vs. merely restricted.
+- [ ] **215-004** — 215.2 Informational Note voltage-drop recommendation
+  Citation: `215.2, Informational Note` · Marked correct: "A recommendation only, not a mandatory Code requirement"
+  Unsure about: Confirm the recommended voltage-drop percentage figure (commonly cited as ~3% feeder / ~5% combined) is accurately represented, even though the mandatory-vs-recommended framing itself is solid.
 
-## Article 220 (9)
+## Article 250 (4)
 
-- [x] **220-007** — Table 220.54 single dryer demand load minimum
-  Citation: `Table 220.54` · Marked correct: **5000 watts**
-  Unsure about: Confirm the 5000 W minimum-or-nameplate rule and that it applies to a single dryer as stated, not a multi-dryer scenario.
+- [ ] **250-009** — Table 250.66 grounding electrode conductor sizing basis
+  Citation: `Table 250.66` · Marked correct: "The size of the largest ungrounded service-entrance conductor"
+  Unsure about: Confirm Table 250.66 is genuinely keyed to the largest ungrounded service-entrance conductor as stated, and that this isn't being confused with the OCPD-based logic used for equipment grounding conductors instead.
 
-- [x] **220-008** — Table 220.55 single range (≤12 kW) demand load
-  Citation: `Table 220.55` · Marked correct: **8 kW**
-  Unsure about: Confirm the ~8 kW figure against the actual table column/notes — Table 220.55 has multiple columns depending on appliance count and kW rating, easy to cite the wrong one.
+- [ ] **250-011** — Table 250.102(C)(1) bonding jumper sizing, relation to Table 250.66
+  Citation: `Table 250.102(C)(1)` · Marked correct: "Table 250.66 (grounding electrode conductor sizing)"
+  Unsure about: Confirm Table 250.102(C)(1) is genuinely structured similarly to Table 250.66 as stated — the two tables use related but distinct logic and I want the general parallel confirmed rather than assumed.
 
-- [x] **220-005** — Table 220.45 general lighting demand factor, first 3000 VA *(citation corrected)*
-  Citation: ~~`Table 220.42`~~ → `Table 220.45` · Marked correct: **100%**
-  Corrected: the 3000 VA / 100% demand-factor value was right, but it lives in Table 220.45, not Table 220.42 (which is general lighting *unit loads by occupancy type*, not the demand factor table). Citation fixed in the question text and `references`.
+- [ ] **250-006** — 250.53 rod electrode minimum driven length
+  Citation: `250.53(G)` · Marked correct: **8 feet**
+  Unsure about: Confirm the 8 ft minimum driven length for a single rod electrode against the current 250.53 text, and that I've cited the right subsection.
 
-- [x] **220-006** — 220.53 demand factor for 4+ fixed appliances
-  Citation: `220.53` · Marked correct: **75%**
-  Unsure about: Confirm 75% is still correct for 4+ fastened-in-place appliances, and that the excluded-appliance list (ranges/dryers/HVAC) is accurate.
+- [ ] **250-007** — 250.56 electrode resistance threshold
+  Citation: `250.56` · Marked correct: **Supplemented with one additional electrode** (threshold: over 25 ohms)
+  Unsure about: Confirm the 25-ohm threshold and that exceeding it requires exactly one additional electrode (not more).
 
-- [x] **220-009** — 220.61(B) neutral demand factor on ranges/dryers >200A
-  Citation: `220.61(B)` · Marked correct: **70%**
-  Unsure about: Confirm the 70% figure and the >200A threshold for the unbalanced neutral load on ranges/dryers/similar appliances.
+## Article 310 (8)
 
-- [x] **220-010** — 220.82(B) optional method, first-tier breakpoint
-  Citation: `220.82(B)` · Marked correct: **10 kVA**
-  Unsure about: Confirm the 10 kVA breakpoint (and that the remainder is 40%) for the dwelling unit optional calculation method.
+- [ ] **310-004** — Table 310.16 ampacity, 12 AWG copper at 90°C
+  Citation: `Table 310.16` · Marked correct: **30 amperes**
+  Unsure about: Confirm 30A for 12 AWG copper at the 90°C column in the current table.
 
-- [x] **220-003** — 220.14(I) default receptacle load, other than dwelling units
-  Citation: `220.14(I)` · Marked correct: **180 VA per outlet**
-  Unsure about: Confirm 180 VA/outlet is still the current default value and hasn't been superseded or scope-restricted in 2023.
+- [ ] **310-005** — Table 310.16 ampacity, 10 AWG copper at 75°C
+  Citation: `Table 310.16` · Marked correct: **35 amperes**
+  Unsure about: Confirm 35A for 10 AWG copper at the 75°C column.
 
-- [x] **220-015** — Table 220.84 multifamily demand factor basis
-  Citation: `Table 220.84` · Marked correct: "The number of dwelling units supplied by the feeder or service"
-  Unsure about: Confirm the demand factor is keyed primarily to number of dwelling units and not some other variable.
+- [ ] **310-006** — Table 310.16 ampacity, 8 AWG copper at 75°C
+  Citation: `Table 310.16` · Marked correct: **50 amperes**
+  Unsure about: Confirm 50A for 8 AWG copper at the 75°C column.
 
-- [x] **220-011** — 220.87 existing-load lookback period
-  Citation: `220.87` · Marked correct: **12 months**
-  Unsure about: Confirm 12 months is the correct lookback period for existing maximum demand data (vs. a different interval or a percentage-based rule).
+- [ ] **310-009** — Table 310.15(C)(1) fill adjustment, 4-6 conductors
+  Citation: `Table 310.15(C)(1)` · Marked correct: **80%**
+  Unsure about: Confirm 80% is the correct adjustment factor for 4-6 current-carrying conductors sharing a raceway or cable.
 
-## Article 230 (8)
+- [ ] **310-010** — Table 310.15(C)(1) fill adjustment, 7-9 conductors
+  Citation: `Table 310.15(C)(1)` · Marked correct: **70%**
+  Unsure about: Confirm 70% is the correct adjustment factor for 7-9 current-carrying conductors.
 
-- [x] **230-006** — 230.24(B)(4) vertical clearance over truck-traffic areas *(citation corrected)*
-  Citation: ~~`230.24(B)(5)`~~ → `230.24(B)(4)` · Marked correct: **18 feet**
-  Corrected: 18 ft for truck-traffic areas was right, but (B)(5) is actually the 24½ ft railroad-track clearance — the 18 ft truck-traffic value is under (B)(4).
+- [ ] **310-011** — Neutral conductor counting exception for fill adjustment
+  Citation: `Table 310.15(C)(1), Note` · Marked correct: "Not counted as a current-carrying conductor"
+  Unsure about: Confirm the neutral-counting exception (and its exact location/numbering, since I've cited it generically as "Table 310.15(C)(1), Note" rather than a specific note number) against the current text.
 
-- [x] **230-005** — 230.24(B)(2) vertical clearance over residential property, ≤300V
-  Citation: `230.24(B)(2)` · Marked correct: **12 feet**
-  Unsure about: Confirm the 12 ft figure and the ≤300V threshold for residential property/driveways.
+- [ ] **310-012** — General minimum conductor size for wiring
+  Citation: `310.106(A)` · Marked correct: **14 AWG**
+  Unsure about: Confirm 14 AWG copper is stated as the general minimum in 310.106(A) specifically, rather than in a different section (e.g., 210.19) — I'm not fully confident of the exact citation, even though the 14 AWG figure itself is well-established.
 
-- [x] **230-004** — 230.24(B)(1) vertical clearance at building entrance, ≤150V
-  Citation: `230.24(B)(1)` · Marked correct: **10 feet**
-  Unsure about: Confirm 10 ft applies specifically at the point of entrance/drip loop for ≤150V to ground, not a different voltage/location combination.
+- [ ] **310-013** — Wet/dry 90°C insulation ratings (e.g., XHHW-2 vs. THHN)
+  Citation: `Table 310.104(A)` · Marked correct: "Dry locations only at their 90°C rating" (for THHN)
+  Unsure about: Confirm which specific insulation types are wet/dry-rated at 90°C vs. dry-only, since I generalized rather than citing an exact letter-code table entry.
 
-- [x] **230-003** — 230.9(A) window/door clearance for overhead conductors
-  Citation: `230.9(A)` · Marked correct: **3 feet**
-  Unsure about: Confirm the 3 ft figure and exactly which openings it applies to (windows designed to open vs. also doors/porches).
+## Article 314 (6)
 
-- [x] **230-011** — 230.79(C) minimum service disconnect rating, one-family dwelling
-  Citation: `230.79(C)` · Marked correct: **100 amperes**
-  Unsure about: Confirm 100A specifically applies to one-family dwellings and not a different occupancy tier in the 230.79 table.
+- [ ] **314-012** — 314.28(A)(1) straight-pull box sizing multiplier
+  Citation: `314.28(A)(1)` · Marked correct: "8 times the trade diameter of the largest raceway"
+  Unsure about: Confirm the 8x multiplier for straight pulls of conductors 4 AWG or larger.
 
-- [x] **230-009** — 230.71(B) max number of grouped service disconnects *(citation corrected)*
-  Citation: ~~`230.71(A)`~~ → `230.71(B)` · Marked correct: **Six**
-  Corrected: "six" was right, but 230.71(A) only defines what does *not* count as a disconnecting means — the "up to six disconnects" rule itself is in (B).
+- [ ] **314-013** — 314.28(A)(2) angle/U-pull box sizing formula
+  Citation: `314.28(A)(2)` · Marked correct: "The sum of the diameters of the other raceways on the same wall" (added to 6x the largest raceway)
+  Unsure about: Confirm the 6x-plus-sum-of-other-raceways formula for angle/U pulls.
 
-- [x] **230-014** — 230.6 conductors under a building treated as outside
-  Citation: `230.6` · Marked correct: "This statement is accurate"
-  Unsure about: Confirm the specific conditions (concrete thickness, burial depth, etc.) under which under-building conductors are treated as outside the building, against the current 230.6 list rather than my paraphrase.
+- [ ] **314-006** — Table 314.16(B) volume allowance for 12 AWG
+  Citation: `Table 314.16(B)` · Marked correct: **2.25 cubic inches**
+  Unsure about: Confirm 2.25 cubic inches is the correct allowance for 12 AWG specifically.
 
-- [x] **230-013** — 230.85 emergency disconnect marking requirement *(content corrected)*
-  Citation: `230.85` (unchanged) · Marked correct (corrected): Marked "EMERGENCY DISCONNECT" (red background, white text) and located in a **readily accessible outdoor location on or within sight of the dwelling unit**
-  Corrected: the marking text was right, but the location requirement was wrong — it's not "nearest the point of entrance of the service conductors," it's specifically an outdoor location on or within sight of the dwelling. Answer text and explanation rewritten to match.
+- [ ] **314-003** — 314.16(B)(4) device volume-allowance multiplier
+  Citation: `314.16(B)(4)` · Marked correct: "Two volume allowances, based on the largest conductor connected to it"
+  Unsure about: Confirm a device counts as exactly two volume allowances (not some other multiplier).
 
-## Article 240 (7)
+- [ ] **314-004** — 314.16(B)(5) equipment grounding conductor counting
+  Citation: `314.16(B)(5)` · Marked correct: "One single volume allowance total, based on the largest one present"
+  Unsure about: Confirm all equipment grounding conductors together count as exactly one allowance (based on the largest), not one per conductor.
 
-- [x] **240-008** — 240.21(B)(1) 10-ft tap rule length
-  Citation: `240.21(B)(1)` · Marked correct: **10 feet**
-  Unsure about: Confirm the 10 ft tap length and that no other condition of the 10-ft tap rule was misstated or omitted.
+- [ ] **314-005** — 314.16(B)(2) clamp volume-allowance counting
+  Citation: `314.16(B)(2)` · Marked correct: "One volume allowance, based on the largest conductor in the box"
+  Unsure about: Confirm clamps count as one combined allowance based on the largest conductor present, regardless of how many clamps are in the box.
 
-- [x] **240-009** — 240.21(B)(2) 25-ft tap rule ampacity fraction
-  Citation: `240.21(B)(2)` · Marked correct: "One-third the rating of the feeder overcurrent device"
-  Unsure about: Confirm the 1/3 ampacity fraction for the 25-ft tap rule and the exact conditions attached to it.
+## Article 430 (8)
 
-- [x] **240-006** — 240.4(B) next-size-up ceiling
-  Citation: `240.4(B)` · Marked correct: **800 amperes**
-  Unsure about: Confirm the 800A ceiling on the "round up to next standard size" allowance and that no additional conditions were omitted.
+- [ ] **430-004** — 430.22 single-motor branch-circuit conductor margin
+  Citation: `430.22` · Marked correct: **125% of the motor's full-load current**
+  Unsure about: Confirm 125% is the correct branch-circuit conductor margin over FLC.
 
-- [x] **240-007** — 240.6(A) standard ampere rating list
-  Citation: `240.6(A)` · Marked correct: **70 amperes**
-  Unsure about: Confirm 70A is on the current standard ampere rating list and that none of the distractor values are accidentally also standard sizes.
+- [ ] **430-005** — 430.24 conductors supplying several motors, formula
+  Citation: `430.24` · Marked correct: "The sum of the full-load currents of the other motors" (added to 125% of the largest)
+  Unsure about: Confirm the "largest motor at 125%, plus sum of the others at 100%" formula.
 
-- [x] **240-015** — 240.87 arc energy reduction trigger/purpose
-  Citation: `240.87` · Marked correct: "Reduce clearing time in the event of an arcing fault"
-  Unsure about: Confirm the ampere rating / adjustable trip-setting thresholds that actually trigger this requirement — I described the concept correctly but I'm not confident on the exact numeric trigger.
+- [ ] **430-009** — Table 430.52 non-time-delay fuse maximum
+  Citation: `Table 430.52` · Marked correct: **300% of full-load current**
+  Unsure about: Confirm 300% is the correct non-time-delay fuse maximum.
 
-- [x] **240-011** — 240.24(A) max breaker handle height *(citation corrected)*
-  Citation: ~~`240.24(A)(5)`~~ → `240.24(A)` · Marked correct: **6 feet 7 inches**
-  Corrected: 6 ft 7 in. was right, but there's no subsection (5) — the exceptions under 240.24(A) only go to (4), and the 6 ft 7 in. figure itself is stated in the main (A) paragraph, not a numbered subsection.
+- [ ] **430-010** — Table 430.52 inverse-time breaker maximum
+  Citation: `Table 430.52` · Marked correct: **250% of full-load current**
+  Unsure about: Confirm 250% is the correct inverse-time circuit breaker maximum.
 
-- [x] **240-014** — 240.83(B) breaker marking permanence for ≤100A breakers *(content corrected)*
-  Citation: ~~`240.83(A)`, `240.83(B)`~~ → `240.83(B)` only · Marked correct (corrected): "Durably molded, stamped, or etched into the handle or escutcheon"
-  Corrected: the original question conflated two separate provisions — 240.83(A) is a general *allowance* that a breaker's ampere marking may be made visible by removing a trim or cover, unrelated to any ampere threshold; 240.83(B) *separately* requires breakers rated 100A or less to have the rating durably molded/stamped/etched into the handle or escutcheon (a permanence requirement, not a visibility-without-cover-removal one). Rewritten to test 240.83(B) alone.
+- [ ] **430-006** — 430.32(A)(1) overload sizing, service factor ≥1.15
+  Citation: `430.32(A)(1)` · Marked correct: **125%** of nameplate current
+  Unsure about: Confirm 125% for motors with a marked service factor of 1.15 or greater.
 
-## Article 300 (4)
+- [ ] **430-007** — 430.32(A)(1) overload sizing, standard motors
+  Citation: `430.32(A)(1)` · Marked correct: **115%** of nameplate current
+  Unsure about: Confirm 115% for motors without that service-factor margin.
 
-- [x] **300-004** — Table 300.5 general direct-burial cover depth
-  Citation: `Table 300.5` · Marked correct: **24 inches**
-  Unsure about: Confirm 24 in is still the general/default direct-burial cover depth in the current table, not a value carried over from an older edition.
+- [ ] **430-013** — 430.110(A) motor disconnect ampere rating
+  Citation: `430.110(A)` · Marked correct: **115% of the motor's full-load current**
+  Unsure about: Confirm 115% is the correct disconnect ampere-rating margin, and that it's genuinely distinct from (smaller than) the 125% conductor-sizing margin in 430.22.
 
-- [x] **300-006** — Table 300.5 GFCI-protected residential branch circuit cover depth
-  Citation: `Table 300.5` · Marked correct: **12 inches**
-  Unsure about: Confirm 12 in applies to ≤120V/20A residential branch circuits with GFCI protection, and that both conditions (GFCI + 20A max) are required together, not independently sufficient.
+- [ ] **430-014** — 430.109 motor disconnect type requirement
+  Citation: `430.109` · Marked correct: "A horsepower-rated device, such as a motor-circuit switch or listed circuit breaker"
+  Unsure about: Confirm the horsepower-rated-device requirement and typical examples against the current 430.109 text.
 
-- [x] **300-005** — Table 300.5 RMC/IMC cover depth
-  Citation: `Table 300.5` · Marked correct: **6 inches**
-  Unsure about: Confirm 6 in for RMC/IMC and that the column applies regardless of location (not just under buildings).
+## Article 450 (4)
 
-- [x] **300-007** — Table 300.5 low-voltage landscape circuit cover depth
-  Citation: `Table 300.5` · Marked correct: **6 inches**
-  Unsure about: Confirm 6 in for ≤30V landscape/irrigation circuits and that Type UF cable is correctly listed as a qualifying method.
+- [ ] **450-009** — 450.21(A) dry-type transformer clearance from combustibles
+  Citation: `450.21(A)` · Marked correct: **12 inches**
+  Unsure about: Confirm the 12-inch clearance figure for dry-type transformers rated 112.5 kVA or less.
+
+- [ ] **450-003** — Table 450.3(B) primary-only overcurrent protection maximum
+  Citation: `Table 450.3(B)` · Marked correct: **125% of primary full-load current**
+  Unsure about: Confirm 125% is the correct primary-only maximum for this current/voltage bracket (primary FLC ≥ 9A, 1000V or less).
+
+- [ ] **450-008** — 450.13(B) hollow-space dry-type transformer kVA cap
+  Citation: `450.13(B)` · Marked correct: **50 kVA**
+  Unsure about: Confirm the 50 kVA cap for dry-type transformers installed in hollow spaces.
+
+- [ ] **450-006** — 450.11 impedance marking threshold
+  Citation: `450.11` · Marked correct: **25 kVA and larger**
+  Unsure about: Confirm 25 kVA is the correct threshold above which impedance marking is required on the nameplate.

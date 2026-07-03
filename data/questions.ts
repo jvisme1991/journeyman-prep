@@ -883,8 +883,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Working space depth requirements increase with both voltage and how exposed the live parts are on either side of the space — Condition 3 (live parts on both sides) at this voltage range calls for the largest of the three depth categories.",
     references: ["Table 110.26(A)(1)"],
-    tags: ["installations", "working-space"],
-    needsReview: true,
+    tags: ["installations", "working-space"],
   },
   {
     id: "110-012",
@@ -938,8 +937,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Dedicated equipment space is meant to keep the area around electrical gear clear of unrelated systems (plumbing, ductwork, etc.) that could leak or fail onto it.",
     references: ["110.26(E)"],
-    tags: ["installations", "dedicated-space"],
-    needsReview: true,
+    tags: ["installations", "dedicated-space"],
   },
   {
     id: "110-015",
@@ -1016,8 +1014,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "24 inches is the general baseline minimum burial depth for an unprotected direct-buried conductor; the table then reduces that requirement for specific conditions like added physical protection, GFCI protection, or low-voltage circuits.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
-    needsReview: true,
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-005",
@@ -1030,8 +1027,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "Because RMC and IMC provide substantial mechanical protection on their own, the table allows a much shallower minimum cover than an unprotected direct-buried cable.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
-    needsReview: true,
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-006",
@@ -1044,8 +1040,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "GFCI protection combined with a low current rating is treated as reducing the shock hazard enough that the table allows a shallower minimum burial depth than the general 24-inch requirement.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
-    needsReview: true,
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-007",
@@ -1058,8 +1053,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "The reduced shock hazard of a low-voltage circuit is reflected in the table's shallowest cover requirement, well below what's required for a standard 120/240V branch circuit.",
     references: ["Table 300.5"],
-    tags: ["wiring-methods", "underground"],
-    needsReview: true,
+    tags: ["wiring-methods", "underground"],
   },
   {
     id: "300-008",
@@ -1435,8 +1429,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "180 VA per outlet (or per strap/yoke) is the default receptacle load value used when a receptacle load isn't already covered by another specific calculation rule.",
     references: ["220.14(I)"],
-    tags: ["load-calculations", "receptacles"],
-    needsReview: true,
+    tags: ["load-calculations", "receptacles"],
   },
   {
     id: "220-004",
@@ -1475,8 +1468,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Once there are enough fixed appliances that they're unlikely to all run simultaneously, the Code allows a 75% demand factor to be applied to their combined nameplate load.",
     references: ["220.53"],
-    tags: ["load-calculations", "demand-factors", "appliances"],
-    needsReview: true,
+    tags: ["load-calculations", "demand-factors", "appliances"],
   },
   {
     id: "220-007",
@@ -1489,8 +1481,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "5000 watts is the floor value used for a single dryer's demand load, with the actual nameplate rating used instead if it's higher.",
     references: ["Table 220.54"],
-    tags: ["load-calculations", "dryer"],
-    needsReview: true,
+    tags: ["load-calculations", "dryer"],
   },
   {
     id: "220-008",
@@ -1503,8 +1494,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "Table 220.55 lets a single range up to 12 kW be counted at roughly 8 kW of demand, reflecting that a range's elements don't all run at full draw simultaneously.",
     references: ["Table 220.55"],
-    tags: ["load-calculations", "range"],
-    needsReview: true,
+    tags: ["load-calculations", "range"],
   },
   {
     id: "220-009",
@@ -1517,8 +1507,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Beyond the 200A threshold, the Code allows a reduced demand factor on the neutral portion of these appliance loads, reflecting that not all the connected load returns on the neutral simultaneously.",
     references: ["220.61(B)"],
-    tags: ["load-calculations", "neutral", "feeders"],
-    needsReview: true,
+    tags: ["load-calculations", "neutral", "feeders"],
   },
   {
     id: "220-010",
@@ -1531,8 +1520,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "The optional method front-loads the first 10 kVA of general load at full value, then applies a reduced demand factor to everything above that, as a simpler alternative to the standard calculation method.",
     references: ["220.82(B)"],
-    tags: ["load-calculations", "optional-method"],
-    needsReview: true,
+    tags: ["load-calculations", "optional-method"],
   },
   {
     id: "220-011",
@@ -1545,8 +1533,7 @@ export const questions: Question[] = [
     correctAnswer: 3,
     explanation: "This provision lets an installer rely on a full year of actual recorded demand data, rather than redoing the entire calculated load, when determining whether there's room for an additional load.",
     references: ["220.87"],
-    tags: ["load-calculations", "existing-loads"],
-    needsReview: true,
+    tags: ["load-calculations", "existing-loads"],
   },
   {
     id: "220-012",
@@ -1618,8 +1605,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "This optional method scales its demand factor down as the number of dwelling units on a shared feeder or service increases, reflecting that not every unit peaks at the same time.",
     references: ["Table 220.84"],
-    tags: ["load-calculations", "optional-method", "multifamily"],
-    needsReview: true,
+    tags: ["load-calculations", "optional-method", "multifamily"],
   },
 
   // Article 230 - Services
@@ -1652,8 +1638,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "This clearance keeps someone leaning out of a window or doorway from being able to reach bare overhead service conductors.",
     references: ["230.9(A)"],
-    tags: ["services", "clearances"],
-    needsReview: true,
+    tags: ["services", "clearances"],
   },
   {
     id: "230-004",
@@ -1666,8 +1651,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "10 feet is the reduced clearance permitted specifically at the point of entrance to a building (and at the final splice/drip loop), rather than the higher clearances required over open ground.",
     references: ["230.24(B)(1)"],
-    tags: ["services", "clearances"],
-    needsReview: true,
+    tags: ["services", "clearances"],
   },
   {
     id: "230-005",
@@ -1680,8 +1664,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "12 feet is the standard clearance over residential driveways and yard areas at this voltage level, stepping up from the reduced 10-foot clearance allowed right at the building's point of entrance.",
     references: ["230.24(B)(2)"],
-    tags: ["services", "clearances"],
-    needsReview: true,
+    tags: ["services", "clearances"],
   },
   {
     id: "230-006",
@@ -1769,8 +1752,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "One-family dwellings have their own minimum service disconnect rating in this section, higher than the general minimum that applies to other occupancy types.",
     references: ["230.79(C)"],
-    tags: ["services", "disconnect"],
-    needsReview: true,
+    tags: ["services", "disconnect"],
   },
   {
     id: "230-012",
@@ -1824,8 +1806,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "230.6 recognizes specific installation methods — including sufficient concrete encasement or minimum burial cover — that let conductors routed under a building still be treated as if they were outside it.",
     references: ["230.6"],
-    tags: ["services", "conductors-outside-building"],
-    needsReview: true,
+    tags: ["services", "conductors-outside-building"],
   },
   {
     id: "230-015",
@@ -1915,8 +1896,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "The 'round up to the next standard size' allowance has an upper ceiling — above that ampere threshold, the conductor's actual ampacity has to be matched more precisely rather than rounded up.",
     references: ["240.4(B)"],
-    tags: ["overcurrent-protection", "conductor-protection"],
-    needsReview: true,
+    tags: ["overcurrent-protection", "conductor-protection"],
   },
   {
     id: "240-007",
@@ -1929,8 +1909,7 @@ export const questions: Question[] = [
     correctAnswer: 2,
     explanation: "70A is one of the listed standard sizes in the standard ampere rating table, while the other options fall between standard sizes and aren't recognized standard ratings.",
     references: ["240.6(A)"],
-    tags: ["overcurrent-protection", "standard-ratings"],
-    needsReview: true,
+    tags: ["overcurrent-protection", "standard-ratings"],
   },
   {
     id: "240-008",
@@ -1943,8 +1922,7 @@ export const questions: Question[] = [
     correctAnswer: 0,
     explanation: "The 10-foot tap rule allows a very short tap conductor to skip having its own overcurrent device at the tap point, provided it meets several other conditions like ampacity and termination requirements.",
     references: ["240.21(B)(1)"],
-    tags: ["overcurrent-protection", "feeder-taps"],
-    needsReview: true,
+    tags: ["overcurrent-protection", "feeder-taps"],
   },
   {
     id: "240-009",
@@ -1962,8 +1940,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "The 25-foot tap rule trades a longer allowed tap length for a stricter minimum ampacity requirement on the tap conductor, relative to the feeder's overcurrent device rating.",
     references: ["240.21(B)(2)"],
-    tags: ["overcurrent-protection", "feeder-taps"],
-    needsReview: true,
+    tags: ["overcurrent-protection", "feeder-taps"],
   },
   {
     id: "240-010",
@@ -2066,8 +2043,7 @@ export const questions: Question[] = [
     correctAnswer: 1,
     explanation: "Arc energy reduction methods (like zone-selective interlocking or an energy-reducing maintenance switch) are meant to shorten how long a large breaker takes to clear an arcing fault, limiting the energy released.",
     references: ["240.87"],
-    tags: ["overcurrent-protection", "arc-energy-reduction"],
-    needsReview: true,
+    tags: ["overcurrent-protection", "arc-energy-reduction"],
   },
 
   // Article 215 - Feeders
