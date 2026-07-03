@@ -8,11 +8,11 @@ export default function LearnPage() {
       <AppShell>
         <div className="space-y-8">
           <div>
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-4xl font-bold text-foreground">
               Learn
             </h1>
 
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 text-muted-foreground">
               Choose an NEC article to study.
             </p>
           </div>
