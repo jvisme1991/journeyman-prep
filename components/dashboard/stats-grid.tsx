@@ -29,13 +29,13 @@ export function StatsGrid({ stats }: Props) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-2xl border border-slate-800 bg-slate-900 p-5"
+          className="rounded-card border border-border bg-card p-5 shadow-lg shadow-black/20"
         >
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {item.label}
           </p>
 
-          <h3 className="mt-3 text-3xl font-bold">
+          <h3 className="mt-3 text-3xl font-bold text-foreground">
             {item.value}
           </h3>
         </div>

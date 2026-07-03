@@ -7,35 +7,35 @@ interface Props {
 
 export function ReadinessCard({ data }: Props) {
   return (
-    <section className="mb-6 rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl">
+    <section className="mb-6 rounded-card border border-border bg-card p-6 shadow-lg shadow-black/20">
       <div className="mb-5 flex items-start justify-between">
         <div>
-          <p className="text-sm text-slate-400">Exam Readiness</p>
+          <p className="text-sm text-muted-foreground">Exam Readiness</p>
 
           <div className="mt-2 flex items-end gap-2">
-            <span className="text-6xl font-black">
+            <span className="text-6xl font-black text-foreground">
               {data.readiness}%
             </span>
 
-            <span className="pb-2 text-slate-500">
+            <span className="pb-2 text-muted-foreground">
               Ready
             </span>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-amber-500/10 p-3">
-          <Trophy className="text-amber-400" size={24} />
+        <div className="rounded-2xl bg-accent/10 p-3">
+          <Trophy className="text-accent" size={24} />
         </div>
       </div>
 
-      <div className="h-3 overflow-hidden rounded-full bg-slate-800">
+      <div className="h-3 overflow-hidden rounded-full bg-border">
         <div
-          className="h-full rounded-full bg-blue-500 transition-all"
+          className="h-full rounded-full bg-accent transition-all"
           style={{ width: `${data.readiness}%` }}
         />
       </div>
 
-      <p className="mt-4 text-sm text-slate-400">
+      <p className="mt-4 text-sm text-muted-foreground">
         {data.nextLesson}
       </p>
     </section>

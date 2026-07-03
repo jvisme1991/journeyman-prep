@@ -8,6 +8,8 @@ import { getDashboardStats, getReadinessData } from "@/lib/progress-stats";
 import { StorageService } from "@/services/storage-service";
 import type { ProgressRecord } from "@/types/progress";
 
+import { AccuracyByArticleChart } from "./accuracy-by-article-chart";
+
 export function ProgressOverview() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
 
@@ -24,10 +26,10 @@ export function ProgressOverview() {
 
   if (progress.history.length === 0) {
     return (
-      <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
-        <h2 className="text-xl font-bold">Your Progress</h2>
+      <section className="rounded-card border border-border bg-card p-6 shadow-lg shadow-black/20">
+        <h2 className="text-xl font-bold text-foreground">Your Progress</h2>
 
-        <p className="mt-2 text-slate-400">
+        <p className="mt-2 text-muted-foreground">
           Complete a practice session to see your accuracy, streak, and exam
           readiness here.
         </p>
@@ -42,6 +44,7 @@ export function ProgressOverview() {
     <div>
       <ReadinessCard data={readiness} />
       <StatsGrid stats={stats} />
+      <AccuracyByArticleChart history={progress.history} />
     </div>
   );
 }
