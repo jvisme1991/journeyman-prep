@@ -25,9 +25,16 @@ export function TrainingSession({ article }: TrainingSessionProps) {
     result,
     progress,
     completed,
+    loading,
   } = usePractice(article);
 
   const submitted = result !== undefined;
+
+  // Session data (random pool or resumed session) is only built client-side
+  // after mount to avoid a hydration mismatch — render nothing until then.
+  if (loading || !question) {
+    return null;
+  }
 
   if (progress.total === 0) {
     return (

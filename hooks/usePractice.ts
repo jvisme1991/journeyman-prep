@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PracticeService } from "../services/practice-service";
 
@@ -27,39 +27,43 @@ function buildState(article?: string): PracticeState {
 }
 
 export function usePractice(article?: string) {
-  const [state, setState] = useState(() => buildState(article));
+  // Starts as null (not built via a useState initializer) because building
+  // a session calls PracticeService -> questionRepository.getRandom(),
+  // which uses Math.random(). Doing that during the initial render would
+  // make the server-rendered HTML diverge from the client's first render
+  // and trigger a hydration mismatch. Session resume from localStorage has
+  // the same problem (server has no access to localStorage), so both the
+  // "resume" and "random" paths need to wait until after mount.
+  const [state, setState] = useState<PracticeState | null>(null);
   const [selected, setSelected] = useState<number>();
   const [result, setResult] = useState<PracticeResult>();
   const [completed, setCompleted] = useState(false);
 
-  // Skip the effect on mount: initial state is already built above. Only
-  // rebuild the session when `article` changes on a later render.
-  const isFirstRender = useRef(true);
-
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setState(buildState(article));
     setSelected(undefined);
     setResult(undefined);
     setCompleted(false);
   }, [article]);
 
-  const { service, question, progress } = state;
+  const loading = state === null;
+  const service = state?.service;
+  const question = state?.question;
+  const progress = state?.progress ?? { current: 0, total: 0, score: 0 };
 
   function submit() {
-    if (selected === undefined) return;
+    if (selected === undefined || !service) return;
 
     const response = service.submitAnswer(selected);
 
     setResult(response);
-    setState((prev) => ({ ...prev, progress: service.getProgress() }));
+    setState((prev) => (prev ? { ...prev, progress: service.getProgress() } : prev));
   }
 
   function next() {
+    if (!service) return;
+
     const hasNext = service.nextQuestion();
 
     if (!hasNext) {
@@ -69,11 +73,15 @@ export function usePractice(article?: string) {
 
     setSelected(undefined);
     setResult(undefined);
-    setState((prev) => ({
-      ...prev,
-      question: service.getCurrentQuestion(),
-      progress: service.getProgress(),
-    }));
+    setState((prev) =>
+      prev
+        ? {
+            ...prev,
+            question: service.getCurrentQuestion(),
+            progress: service.getProgress(),
+          }
+        : prev
+    );
   }
 
   function restart() {
@@ -93,5 +101,6 @@ export function usePractice(article?: string) {
     result,
     progress,
     completed,
+    loading,
   };
 }
