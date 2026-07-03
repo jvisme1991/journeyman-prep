@@ -9,12 +9,14 @@ interface ResumedSession {
   pool: Question[];
   currentIndex: number;
   score: number;
+  submittedAnswer?: number;
 }
 
 export class PracticeService {
   private questionPool: Question[];
   private currentIndex = 0;
   private score = 0;
+  private submittedAnswer?: number;
   private readonly article?: string;
 
   constructor(article?: string) {
@@ -26,6 +28,7 @@ export class PracticeService {
       this.questionPool = resumed.pool;
       this.currentIndex = resumed.currentIndex;
       this.score = resumed.score;
+      this.submittedAnswer = resumed.submittedAnswer;
     } else {
       this.questionPool = article
         ? questionRepository.getByArticle(article)
@@ -61,7 +64,12 @@ export class PracticeService {
       return null;
     }
 
-    return { pool, currentIndex: saved.currentIndex, score: saved.score };
+    return {
+      pool,
+      currentIndex: saved.currentIndex,
+      score: saved.score,
+      submittedAnswer: saved.submittedAnswer,
+    };
   }
 
   private persistSession() {
@@ -70,6 +78,7 @@ export class PracticeService {
       questionIds: this.questionPool.map((q) => q.id),
       currentIndex: this.currentIndex,
       score: this.score,
+      submittedAnswer: this.submittedAnswer,
     };
 
     StorageService.saveActiveSession(session);
@@ -98,10 +107,32 @@ export class PracticeService {
       correct,
     });
 
+    this.submittedAnswer = answer;
     this.persistSession();
 
     return {
       correct,
+      correctAnswer: question.correctAnswer,
+      explanation: question.explanation,
+    };
+  }
+
+  /**
+   * If the current question has already been submitted (e.g. the session
+   * was resumed after leaving mid-question), returns the same feedback
+   * submitAnswer() would have returned, so the UI can restore it instead
+   * of presenting the question as fresh and allowing a duplicate submit.
+   */
+  getSubmittedResult() {
+    if (this.submittedAnswer === undefined) {
+      return undefined;
+    }
+
+    const question = this.getCurrentQuestion();
+
+    return {
+      answer: this.submittedAnswer,
+      correct: this.submittedAnswer === question.correctAnswer,
       correctAnswer: question.correctAnswer,
       explanation: question.explanation,
     };
@@ -114,6 +145,7 @@ export class PracticeService {
     }
 
     this.currentIndex++;
+    this.submittedAnswer = undefined;
     this.persistSession();
     return true;
   }

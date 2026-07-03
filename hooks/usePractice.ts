@@ -39,11 +39,30 @@ export function usePractice(article?: string) {
   const [result, setResult] = useState<PracticeResult>();
   const [completed, setCompleted] = useState(false);
 
+  // Builds (or resumes) a session and syncs `selected`/`result` to match.
+  // If the resumed question was already submitted before the session was
+  // left, this restores its feedback view instead of presenting it as an
+  // unanswered question a user could submit a second time.
+  function loadState(article?: string) {
+    const built = buildState(article);
+    const submitted = built.service.getSubmittedResult();
+
+    setState(built);
+    setSelected(submitted?.answer);
+    setResult(
+      submitted
+        ? {
+            correct: submitted.correct,
+            correctAnswer: submitted.correctAnswer,
+            explanation: submitted.explanation,
+          }
+        : undefined
+    );
+  }
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setState(buildState(article));
-    setSelected(undefined);
-    setResult(undefined);
+    loadState(article);
     setCompleted(false);
   }, [article]);
 
@@ -85,9 +104,7 @@ export function usePractice(article?: string) {
   }
 
   function restart() {
-    setState(buildState(article));
-    setSelected(undefined);
-    setResult(undefined);
+    loadState(article);
     setCompleted(false);
   }
 

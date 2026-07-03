@@ -8,17 +8,19 @@ Full walkthrough of every screen and interaction after the industrial/amber rede
 
 ## Bugs Found
 
-### Blocking
-
-**Resuming a question you already submitted (but didn't advance past) lets you re-submit it, duplicating your answer history and inflating your score/accuracy.**
-
-Repro: answer a question, tap Submit, then leave the app (navigate to Home, close the tab, etc.) *before* tapping "Next Question." Come back and resume — the app correctly shows you back on the same question, but in its *unanswered* state, letting you submit again. Confirmed via `localStorage`: the same `questionId` appeared twice in `history` after resubmitting, and the session's `score` incremented a second time for the same question.
-
-Root cause: `ActiveSession` (in `services/storage-service.ts`) only persists `{article, questionIds, currentIndex, score}` — it doesn't track whether the *current* question has already been submitted. `currentIndex` only advances in `PracticeService.nextQuestion()`, not in `submitAnswer()`, so a submitted-but-not-advanced question resumes as if untouched. Meanwhile `usePractice.ts`'s `selected`/`result` state is pure client state that always resets on remount, so the UI has no memory of the earlier submission either.
-
-Not fixed in this pass — the right fix needs a design decision (should resuming mid-question restore the previous feedback view, silently skip to the next question, or block re-submission?) and touches `practice-service.ts`'s core resume logic, which is more than a small isolated patch. Flagging for a dedicated follow-up.
-
 ### Fixed during this pass
+
+- **Resuming a question you already submitted (but didn't advance past) let you re-submit it, duplicating your answer history and inflating your score/accuracy.**
+
+  Repro was: answer a question, tap Submit, then leave the app *before* tapping "Next Question." Resuming showed the same question in its *unanswered* state, letting you submit again — confirmed via `localStorage`, the same `questionId` appeared twice in `history` and the session's `score` incremented a second time for the same question.
+
+  Root cause: `ActiveSession` only persisted `{article, questionIds, currentIndex, score}` — nothing captured whether the *current* question had already been submitted, or what was picked. `usePractice.ts`'s `selected`/`result` state is pure client state that always reset on remount, so the UI had no memory of the earlier submission either.
+
+  Fix: `ActiveSession` now also persists `submittedAnswer` (the answer index for the current question, if submitted). `PracticeService.getSubmittedResult()` reconstructs the same `{correct, correctAnswer, explanation}` feedback `submitAnswer()` would have returned, from the current question plus the persisted answer. `usePractice.ts` calls this on every load/resume and, if present, restores `selected`/`result` from it instead of resetting to "unanswered" — so `TrainingSession`'s existing `submitted` rendering path (disabled answer buttons, feedback view, "Next" as the only way forward) kicks in automatically, exactly as if the question had just been submitted in the current tab. `submittedAnswer` is cleared in `nextQuestion()` so a genuinely fresh question is never affected.
+
+  Verified: submitted a question, left before advancing, resumed — same question, "✓ Correct" and its explanation restored, all four answer buttons disabled, no Submit button, only "Next Question →" present, and `localStorage` history still showed exactly one entry for that question. Confirmed normal advancement (clearing `submittedAnswer`, moving to a fresh interactive question) and normal first-time submission both still work unaffected.
+
+  Checked existing `localStorage` history data left over from testing for duplicate-signature entries (same `questionId`, same session, near-identical timestamps) per the fix task's request — found none; the duplicate entries created while originally reproducing this bug had already been wiped by an unrelated `localStorage` clear performed later in the same QA session (for the Stats zero-data edge case test), so there was nothing left to clean up.
 
 - **`/train` hydration mismatch** — the random question pool was selected via `Math.random()` inside a `useState` initializer, which runs during both SSR and the client's first render, so the two diverged and React discarded/regenerated the tree on every load. Fixed by deferring session construction to a post-mount `useEffect` (see commit history). Verified via a genuine fresh page load: the raw SSR HTML for `/train` now contains no question content, and the console shows zero hydration warnings.
 - **Regression introduced by the hydration fix, caught during this walkthrough** — the new loading guard (`if (loading || !question) return null`) accidentally also swallowed the legitimate "no questions for this article" empty state, since an empty question pool also has `question === undefined`. A user hitting `/train?article=999` (or any article with zero questions) saw a permanently blank page instead of the "No Questions Available" message. Fixed by checking `loading` on its own, then checking `progress.total === 0 || !question` together for the empty state. Verified both the normal random session and the invalid-article case render correctly now.
@@ -50,7 +52,7 @@ Not fixed in this pass — the right fix needs a design decision (should resumin
 *Confirmed working through direct interaction — no need to re-touch or re-verify these.*
 
 - **Answer color-coding on Train**: neutral → amber (selected) → teal (correct) / red (incorrect) — verified by actually submitting both a correct and an incorrect answer and inspecting the resulting classes/colors.
-- **Session resume**, for both the random/unfiltered pool and an article-filtered session — verified round-trip by answering a question, navigating to Home and back, and confirming it resumed at the right question rather than restarting (aside from the mid-question double-submit bug noted above).
+- **Session resume**, for both the random/unfiltered pool and an article-filtered session — verified round-trip by answering a question, navigating to Home and back, and confirming it resumed at the right question rather than restarting, including the now-fixed case of resuming mid-question (submitted but not yet advanced).
 - **Article-filter routing end to end**: Learn → `/train?article=X` → Home's "Continue Practice" card correctly preserves the article filter in its resume link.
 - **Session completion flow**: finishing a 3-question session showed the correct score (2/3, 67%), and "Start New Session" correctly restarted with a fresh session.
 - **Stats charts across all data states**: zero history (empty-state message, no crash), exactly one data point (renders a single bar correctly, no layout break), and many data points — all verified directly, no console errors in any state.
