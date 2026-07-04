@@ -6,7 +6,7 @@ This roadmap sequences the [Project Vision](PRODUCT_VISION.md) into phases, orde
 
 * **Question bank:** 12 questions total, covering 9 of 13 tracked NEC articles. Articles 90, 100, 110, and 300 have zero questions and render "No questions available" in Train mode.
 * **Content model:** `data/questions.ts` (flat array, `Question` type) is the only source of truth. `data/articles.ts` (article metadata/question counts) is out of sync with the actual question data — it lists inflated counts and is missing articles (215, 314, 450) that already have questions.
-* **Persistence:** `localStorage` only, via `StorageService`. No accounts, no cross-device sync, no server.
+* **Persistence:** `localStorage` for guests (unchanged default); Supabase-backed accounts, cross-device sync, and Google sign-in now exist for signed-in users as of Phase 2 (see below).
 * **Hosting:** Static export (`next build`) for every route except `/train`, which is server-rendered on demand because of a dynamic search param. No backend, no auth, no database.
 * **Feature surface:** Dashboard, Learn (article picker), Train (randomized or article-filtered practice with resume), Stats, Profile. No exam simulator, no calculators, no lessons, no flashcards, no NEC browser, no admin tooling.
 
@@ -42,16 +42,21 @@ Any content-import tooling built in Phase 7 should include a review step that ma
 
 ---
 
-## Phase 2 — Supabase / Auth Migration
+## Phase 2 — Supabase / Auth Migration ✅ Complete
 
-**Goal:** Move off `localStorage`-only persistence so progress, accounts, and content can live server-side.
+**Shipped:** Google OAuth sign-in via Supabase Auth, client-side only — no middleware, no API routes, no server-side auth helpers. This turned out to mean the original assumption below (that static export "no longer fits" and hosting would need to change) wasn't necessary — the app kept its existing deployment model unchanged.
 
-* Stand up Supabase project: schema for questions/articles (migrated from the static TS files produced in Phase 1), users, answer history, and active sessions.
-* Add Supabase Auth (sign up/in, session handling).
-* Migrate `StorageService` responsibilities (answer history, streaks, daily goal, active session resume) to Supabase-backed reads/writes, preserving the existing resume-session behavior in `practice-service.ts`.
-* Revisit hosting: static export no longer fits once auth callbacks and server-side data access are required — this phase includes deciding the new deployment model (e.g., Vercel/Node runtime).
+Signed-out users are entirely unaffected: all reads/writes still go to `localStorage` via `StorageService`, exactly as before. Signed-in users read/write Supabase instead (`answer_history`, `user_preferences`, `active_sessions`), scoped to `auth.uid()` with Row Level Security enabled on every table. Routing between the two backends lives in one place (`services/progress-service.ts`), so `PracticeService` and every UI consumer didn't need backend-specific branching.
 
-**Depends on:** Phase 1, so the question/article schema being migrated into Supabase is already correct rather than being migrated twice. This phase is itself a hard dependency for Phase 3 (durable exam attempts), Phase 6 (per-user mastery/streak data), and Phase 7 (admin portal needs a backend and role-based access to exist at all).
+A one-time local-to-cloud migration runs on first sign-in per browser: local guest data with no existing cloud data gets pushed up automatically (local data is never deleted — left in place either way). Local data *and* existing cloud data together triggers an explicit choice on Profile ("Keep Cloud Data" vs. "Keep Local Data") instead of guessing at a merge; both resolution paths were tested. The submit/resume no-duplicate fix (`services/practice-service.ts`'s `submittedAnswer`/`getSubmittedResult`) needed zero changes to carry over to the Supabase-backed path — same logic, either backend.
+
+**Verified:** all 5 test scenarios confirmed via direct database queries — fresh sign-in, guest fallback after sign-out, clean migration push-up, conflict prompt (both "keep cloud" and "keep local" resolutions), and resume-with-no-duplicate against live Supabase data.
+
+**Known limitations, not yet addressed** (candidates for a future polish pass, not blockers):
+* Network failure mid-write to Supabase (e.g., the connection drops during `recordAnswer`) is untested and unhandled — no retry logic, no user-facing error state.
+* No confirmed loading indicator during the post-sign-in migration check — there's a brief window where Stats/Home could flash stale or incorrect numbers before the check resolves and real data loads.
+
+**Unblocked:** Phase 3 (durable exam attempts), Phase 6 (per-user mastery/streak data), and Phase 7 (admin portal needs a backend and role-based access) can now build on this.
 
 ---
 
