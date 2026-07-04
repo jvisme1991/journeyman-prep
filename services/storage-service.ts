@@ -1,3 +1,4 @@
+import { computeStreakUpdate } from "@/lib/streak";
 import type {
   ActiveSession,
   AnsweredQuestion,
@@ -7,13 +8,8 @@ import type {
 const STORAGE_KEY = "journeyman-prep:progress:v1";
 const MAX_HISTORY = 500;
 const DEFAULT_DAILY_GOAL = 25;
-const MS_PER_DAY = 86_400_000;
 
-function isoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
-}
-
-function defaultProgress(): ProgressRecord {
+export function defaultProgress(): ProgressRecord {
   return {
     history: [],
     dailyGoal: DEFAULT_DAILY_GOAL,
@@ -74,7 +70,6 @@ export const StorageService = {
   recordAnswer(entry: Omit<AnsweredQuestion, "answeredAt">): ProgressRecord {
     const progress = StorageService.load();
     const now = new Date();
-    const today = isoDate(now);
 
     progress.history.push({ ...entry, answeredAt: now.toISOString() });
 
@@ -82,15 +77,10 @@ export const StorageService = {
       progress.history = progress.history.slice(-MAX_HISTORY);
     }
 
-    if (progress.lastActiveDate !== today) {
-      const yesterday = isoDate(new Date(now.getTime() - MS_PER_DAY));
-
-      progress.currentStreak =
-        progress.lastActiveDate === yesterday ? progress.currentStreak + 1 : 1;
-
-      progress.bestStreak = Math.max(progress.bestStreak, progress.currentStreak);
-      progress.lastActiveDate = today;
-    }
+    const streak = computeStreakUpdate(progress, now);
+    progress.currentStreak = streak.currentStreak;
+    progress.bestStreak = streak.bestStreak;
+    progress.lastActiveDate = streak.lastActiveDate;
 
     StorageService.save(progress);
     return progress;

@@ -16,8 +16,8 @@ interface PracticeState {
   progress: ReturnType<PracticeService["getProgress"]>;
 }
 
-function buildState(article?: string): PracticeState {
-  const service = new PracticeService(article);
+async function buildState(article?: string): Promise<PracticeState> {
+  const service = await PracticeService.create(article);
 
   return {
     service,
@@ -28,12 +28,11 @@ function buildState(article?: string): PracticeState {
 
 export function usePractice(article?: string) {
   // Starts as null (not built via a useState initializer) because building
-  // a session calls PracticeService -> questionRepository.getRandom(),
-  // which uses Math.random(). Doing that during the initial render would
-  // make the server-rendered HTML diverge from the client's first render
-  // and trigger a hydration mismatch. Session resume from localStorage has
-  // the same problem (server has no access to localStorage), so both the
-  // "resume" and "random" paths need to wait until after mount.
+  // a session calls PracticeService -> ProgressService, which for guests
+  // uses Math.random() for question selection and for signed-in users
+  // reads from Supabase -- both are unsafe to do during the initial
+  // render, since it would make the server-rendered HTML diverge from the
+  // client's first render and trigger a hydration mismatch.
   const [state, setState] = useState<PracticeState | null>(null);
   const [selected, setSelected] = useState<number>();
   const [result, setResult] = useState<PracticeResult>();
@@ -43,8 +42,8 @@ export function usePractice(article?: string) {
   // If the resumed question was already submitted before the session was
   // left, this restores its feedback view instead of presenting it as an
   // unanswered question a user could submit a second time.
-  function loadState(article?: string) {
-    const built = buildState(article);
+  async function loadState(article?: string) {
+    const built = await buildState(article);
     const submitted = built.service.getSubmittedResult();
 
     setState(built);
@@ -71,19 +70,19 @@ export function usePractice(article?: string) {
   const question = state?.question;
   const progress = state?.progress ?? { current: 0, total: 0, score: 0 };
 
-  function submit() {
+  async function submit() {
     if (selected === undefined || !service) return;
 
-    const response = service.submitAnswer(selected);
+    const response = await service.submitAnswer(selected);
 
     setResult(response);
     setState((prev) => (prev ? { ...prev, progress: service.getProgress() } : prev));
   }
 
-  function next() {
+  async function next() {
     if (!service) return;
 
-    const hasNext = service.nextQuestion();
+    const hasNext = await service.nextQuestion();
 
     if (!hasNext) {
       setCompleted(true);

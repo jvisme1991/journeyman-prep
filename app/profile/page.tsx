@@ -3,6 +3,7 @@ import { BookOpen, GraduationCap, Tag } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 import { AuthSection } from "@/components/profile/auth-section";
+import { MigrationConflict } from "@/components/profile/migration-conflict";
 import { ProfileProgress } from "@/components/profile/profile-progress";
 import { SettingRow } from "@/components/profile/setting-row";
 import { questionRepository } from "@/services/question-repository";
@@ -23,6 +24,8 @@ export default function ProfilePage() {
           </div>
 
           <AuthSection />
+
+          <MigrationConflict />
 
           <div className="rounded-card border border-border bg-card p-6 shadow-lg shadow-black/20">
             <div className="space-y-5">

@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { ListChecks, Percent, Target } from "lucide-react";
 
+import { useAuth } from "@/hooks/useAuth";
 import { getDashboardStats } from "@/lib/progress-stats";
-import { StorageService } from "@/services/storage-service";
+import { ProgressService } from "@/services/progress-service";
 import type { ProgressRecord } from "@/types/progress";
 
 import { SettingRow } from "./setting-row";
@@ -13,15 +14,16 @@ export function ProfileProgress() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
   const [draft, setDraft] = useState("");
   const [saved, setSaved] = useState(false);
+  const { user, migrationStatus } = useAuth();
 
-  // One-time client-only hydration read; see home-dashboard.tsx for why
-  // this can't be computed during the initial render.
+  // Client-only load; see home-dashboard.tsx for why this can't be
+  // computed during the initial render, and why it depends on auth state.
   useEffect(() => {
-    const loaded = StorageService.load();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProgress(loaded);
-    setDraft(String(loaded.dailyGoal));
-  }, []);
+    ProgressService.load().then((loaded) => {
+      setProgress(loaded);
+      setDraft(String(loaded.dailyGoal));
+    });
+  }, [user, migrationStatus]);
 
   if (!progress) {
     return null;
@@ -29,14 +31,14 @@ export function ProfileProgress() {
 
   const stats = getDashboardStats(progress);
 
-  function handleSave() {
+  async function handleSave() {
     const parsed = Number(draft);
 
     if (!Number.isFinite(parsed) || parsed <= 0) {
       return;
     }
 
-    const updated = StorageService.setDailyGoal(parsed);
+    const updated = await ProgressService.setDailyGoal(parsed);
 
     setProgress(updated);
     setDraft(String(updated.dailyGoal));

@@ -4,21 +4,22 @@ import { useEffect, useState } from "react";
 
 import { ReadinessCard } from "@/components/dashboard/readiness-card";
 import { StatsGrid } from "@/components/dashboard/stats-grid";
+import { useAuth } from "@/hooks/useAuth";
 import { getDashboardStats, getReadinessData } from "@/lib/progress-stats";
-import { StorageService } from "@/services/storage-service";
+import { ProgressService } from "@/services/progress-service";
 import type { ProgressRecord } from "@/types/progress";
 
 import { AccuracyByArticleChart } from "./accuracy-by-article-chart";
 
 export function ProgressOverview() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
+  const { user, migrationStatus } = useAuth();
 
-  // One-time client-only hydration read; see home-dashboard.tsx for why
-  // this can't be computed during the initial render.
+  // Client-only load; see home-dashboard.tsx for why this can't be
+  // computed during the initial render, and why it depends on auth state.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProgress(StorageService.load());
-  }, []);
+    ProgressService.load().then(setProgress);
+  }, [user, migrationStatus]);
 
   if (!progress) {
     return null;

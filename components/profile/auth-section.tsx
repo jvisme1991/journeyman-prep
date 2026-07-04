@@ -5,7 +5,7 @@ import { LogIn, LogOut, User as UserIcon } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 export function AuthSection() {
-  const { user, loading, configured, signInWithGoogle, signOut } = useAuth();
+  const { user, loading, configured, migrationStatus, signInWithGoogle, signOut } = useAuth();
 
   if (loading) {
     return null;
@@ -40,7 +40,9 @@ export function AuthSection() {
 
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold text-foreground">{name}</p>
-        <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+        <p className="truncate text-xs text-muted-foreground">
+          {migrationStatus === "checking" ? "Checking your saved progress…" : user.email}
+        </p>
       </div>
 
       <button

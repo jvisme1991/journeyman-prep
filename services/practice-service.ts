@@ -1,5 +1,5 @@
 import { questionRepository } from "./question-repository";
-import { StorageService } from "./storage-service";
+import { ProgressService } from "./progress-service";
 import type { Question } from "@/types/question";
 import type { ActiveSession } from "@/types/progress";
 
@@ -13,29 +13,43 @@ interface ResumedSession {
 }
 
 export class PracticeService {
-  private questionPool: Question[];
-  private currentIndex = 0;
-  private score = 0;
-  private submittedAnswer?: number;
   private readonly article?: string;
 
-  constructor(article?: string) {
+  private constructor(
+    article: string | undefined,
+    private questionPool: Question[],
+    private currentIndex: number,
+    private score: number,
+    private submittedAnswer: number | undefined
+  ) {
     this.article = article;
+  }
 
-    const resumed = this.tryResume(article);
+  /**
+   * Async because resuming (or starting fresh) now goes through
+   * ProgressService, which reads from Supabase for signed-in users --
+   * this can no longer be a plain synchronous constructor.
+   */
+  static async create(article?: string): Promise<PracticeService> {
+    const resumed = await PracticeService.tryResume(article);
 
     if (resumed) {
-      this.questionPool = resumed.pool;
-      this.currentIndex = resumed.currentIndex;
-      this.score = resumed.score;
-      this.submittedAnswer = resumed.submittedAnswer;
-    } else {
-      this.questionPool = article
-        ? questionRepository.getByArticle(article)
-        : questionRepository.getRandom(RANDOM_SESSION_LENGTH);
-
-      this.persistSession();
+      return new PracticeService(
+        article,
+        resumed.pool,
+        resumed.currentIndex,
+        resumed.score,
+        resumed.submittedAnswer
+      );
     }
+
+    const pool = article
+      ? questionRepository.getByArticle(article)
+      : questionRepository.getRandom(RANDOM_SESSION_LENGTH);
+
+    const service = new PracticeService(article, pool, 0, 0, undefined);
+    await service.persistSession();
+    return service;
   }
 
   /**
@@ -44,8 +58,8 @@ export class PracticeService {
    * Falls back to a fresh session if the saved question ids no longer
    * resolve against the current question bank.
    */
-  private tryResume(article?: string): ResumedSession | null {
-    const saved = StorageService.load().activeSession;
+  private static async tryResume(article?: string): Promise<ResumedSession | null> {
+    const saved = (await ProgressService.load()).activeSession;
 
     if (
       !saved ||
@@ -72,7 +86,7 @@ export class PracticeService {
     };
   }
 
-  private persistSession() {
+  private async persistSession(): Promise<void> {
     const session: ActiveSession = {
       article: this.article,
       questionIds: this.questionPool.map((q) => q.id),
@@ -81,7 +95,7 @@ export class PracticeService {
       submittedAnswer: this.submittedAnswer,
     };
 
-    StorageService.saveActiveSession(session);
+    await ProgressService.saveActiveSession(session);
   }
 
   getCurrentQuestion() {
@@ -92,7 +106,7 @@ export class PracticeService {
     return this.article;
   }
 
-  submitAnswer(answer: number) {
+  async submitAnswer(answer: number) {
     const question = this.getCurrentQuestion();
 
     const correct = answer === question.correctAnswer;
@@ -101,14 +115,14 @@ export class PracticeService {
       this.score++;
     }
 
-    StorageService.recordAnswer({
+    await ProgressService.recordAnswer({
       questionId: question.id,
       article: question.article,
       correct,
     });
 
     this.submittedAnswer = answer;
-    this.persistSession();
+    await this.persistSession();
 
     return {
       correct,
@@ -138,15 +152,15 @@ export class PracticeService {
     };
   }
 
-  nextQuestion() {
+  async nextQuestion(): Promise<boolean> {
     if (this.currentIndex >= this.questionPool.length - 1) {
-      StorageService.clearActiveSession();
+      await ProgressService.clearActiveSession();
       return false;
     }
 
     this.currentIndex++;
     this.submittedAnswer = undefined;
-    this.persistSession();
+    await this.persistSession();
     return true;
   }
 

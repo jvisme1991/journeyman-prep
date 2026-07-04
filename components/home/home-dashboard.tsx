@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BarChart3, BookOpen, ChevronRight, GraduationCap, type LucideIcon } from "lucide-react";
 
+import { useAuth } from "@/hooks/useAuth";
 import { getDailyGoalProgress } from "@/lib/progress-stats";
-import { StorageService } from "@/services/storage-service";
+import { ProgressService } from "@/services/progress-service";
 import type { ProgressRecord } from "@/types/progress";
 
 import { DashboardHeader } from "../dashboard/header";
@@ -46,14 +47,17 @@ function StudyLink({ href, icon: Icon, title, description }: StudyLinkProps) {
 
 export function HomeDashboard() {
   const [progress, setProgress] = useState<ProgressRecord | null>(null);
+  const { user, migrationStatus } = useAuth();
 
-  // One-time client-only hydration read: localStorage isn't available on
-  // the server, so progress is loaded after mount rather than on first
-  // render to avoid a server/client markup mismatch.
+  // Client-only load: localStorage isn't available on the server, and
+  // signed-in reads go to Supabase, so progress is loaded after mount
+  // rather than on first render to avoid a server/client markup mismatch.
+  // Re-runs when sign-in state or migration status changes so this
+  // switches from local to cloud data (or back) live, without needing a
+  // page refresh.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProgress(StorageService.load());
-  }, []);
+    ProgressService.load().then(setProgress);
+  }, [user, migrationStatus]);
 
   const dailyGoal = progress
     ? getDailyGoalProgress(progress)
